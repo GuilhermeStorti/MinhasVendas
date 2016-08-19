@@ -1,0 +1,166 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title><ui:insert name="titulo">Minhas Vendas</ui:insert></title>
+	<script
+		src="#{request.contextPath}/resources/jquery/jquery-3.1.0.min.js"></script>
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/resources/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/resources/dist/css/AdminLTE.min.css" />
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/resources/dist/css/skins/skin-blue.min.css" />
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+	<link rel="stylesheet"
+		href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+	<link
+		href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700'
+		rel='stylesheet' type='text/css' />
+	<script
+		href="#{request.contextPath}/resources/node_modules/jquery/dist/jquery.min.js" />
+</h:head>
+
+<h:body class="hold-transition skin-blue sidebar-mini">
+
+	<!-- Main Header -->
+	<header class="main-header">
+
+		<!-- Logo -->
+		<a href="index2.html" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
+			<span class="logo-mini"><b>M</b>v</span> <!-- logo for regular state and mobile devices -->
+			<span class="logo-lg"><b>Minhas</b>Vendas</span>
+		</a>
+
+		<!-- Header Navbar -->
+		<nav class="navbar navbar-static-top" role="navigation">
+			<!-- Sidebar toggle button-->
+			<a href="#" class="sidebar-toggle" data-toggle="offcanvas"
+				role="button"> <span class="sr-only">Toggle navigation</span>
+			</a>
+			<!-- Navbar Right Menu -->
+			<div class="navbar-custom-menu">
+				<ul class="nav navbar-nav">
+					<!-- User Account Menu -->
+					<li class="dropdown user user-menu">
+						<!-- Menu Toggle Button --> <a href="#" class="dropdown-toggle"
+						data-toggle="dropdown"> <!-- The user image in the navbar--> <h:graphicImage
+								library="img" name="user2-160x160.jpg" class="user-image"
+								alt="User Image" /> <!-- hidden-xs hides the username on small devices so only the image appears. -->
+							<span class="hidden-xs">Guilherme Storti</span>
+					</a>
+						<ul class="dropdown-menu">
+							<!-- The user image in the menu -->
+							<li class="user-header"><h:graphicImage library="img"
+									name="user2-160x160.jpg" class="img-circle" alt="User Image" />
+								<p>
+									Alexander Pierce - Web Developer <small>Member since
+										Nov. 2012</small>
+								</p></li>
+							<!-- Menu Body -->
+							<li class="user-body">
+								<div class="col-xs-4 text-center">
+									<a href="#">Followers</a>
+								</div>
+								<div class="col-xs-4 text-center">
+									<a href="#">Sales</a>
+								</div>
+								<div class="col-xs-4 text-center">
+									<a href="#">Friends</a>
+								</div>
+							</li>
+							<!-- Menu Footer-->
+							<li class="user-footer">
+								<div class="pull-left">
+									<a href="#" class="btn btn-default btn-flat">Profile</a>
+								</div>
+								<div class="pull-right">
+									<a href="#" class="btn btn-default btn-flat">Sign out</a>
+								</div>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+
+	<!-- Left side column. contains the logo and sidebar -->
+	<aside class="main-sidebar">
+
+		<!-- sidebar: style can be found in sidebar.less -->
+		<section class="sidebar">
+
+			<!-- search form (Optional) -->
+			<form action="#" method="get" class="sidebar-form">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..." /> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn"
+							class="btn btn-flat">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<!-- /.search form -->
+
+			<!-- Sidebar Menu -->
+			<ul class="sidebar-menu">
+				<li class="header">HEADER</li>
+				<!-- Optionally, you can add icons to the links -->
+				<li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
+				<li><a href="#"><i class="fa fa-link"></i> <span>Another
+							Link</span></a></li>
+				<li class="treeview"><a href="#"><i class="fa fa-link"></i>
+						<span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>
+					<ul class="treeview-menu">
+						<li><a href="#">Link in level 2</a></li>
+						<li><a href="#">Link in level 2</a></li>
+					</ul></li>
+			</ul>
+			<!-- /.sidebar-menu -->
+		</section>
+		<!-- /.sidebar -->
+	</aside>
+
+	<!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper">
+		<!-- Conteudo Principal -->
+		<section class="content">
+
+			<div id="conteudo" class="content-wrapper">
+				<ui:insert name="corpo" />
+			</div>
+
+		</section>
+		<!-- /.Conteudo Principal -->
+	</div>
+	<!-- /.content-wrapper -->
+
+	<!-- Footer -->
+	<footer class="main-footer">
+		<!-- To the right -->
+		<div class="pull-right hidden-xs">Guilherme Storti</div>
+		<!-- Default to the left -->
+		<strong>Copyright 2016</strong> All rights reserved.
+	</footer>
+
+	<p:separator style="martin-top: 20px" />
+
+	<script type="text/javascript"
+		src="#{request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>
+	<!-- Correio -->
+	<script type="text/javascript"
+		src="#{request.contextPath}/resources/dist/js/app.min.js"></script>
+	<!-- Correio -->
+
+
+</h:body>
+</html>
