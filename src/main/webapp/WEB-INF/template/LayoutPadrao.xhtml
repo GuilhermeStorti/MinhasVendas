@@ -20,6 +20,8 @@
 		href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
 	<link rel="stylesheet"
 		href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+	<link rel="stylesheet"
+		href="#{request.contextPath}/resources/sistema.css" />
 	<link
 		href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700'
 		rel='stylesheet' type='text/css' />
@@ -132,15 +134,15 @@
 
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
-		<!-- Conteudo Principal -->
-		<section class="content">
 
-			<div id="conteudo" class="content-wrapper">
-				<ui:insert name="corpo" />
-			</div>
-
+		<section class="content-header">
+			<ui:insert name="tituloConteudo" />
 		</section>
-		<!-- /.Conteudo Principal -->
+		<!-- Main content -->
+		<section class="content">
+			<ui:insert name="corpo" />
+		</section>
+		<!-- Conteudo Principal -->
 	</div>
 	<!-- /.content-wrapper -->
 

@@ -1,0 +1,21 @@
+<ui:composition template="WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo"><h1>Novo produto</h1></ui:define>
+	
+	<ui:define name="corpo">
+		<p:toolbar>
+			<p:toolbarGroup>
+				<p:button value="Novo" outcome="/produtos/CadastroProduto" styleClass="btn btn-primary"/>
+				<p:commandButton value="Salvar"/>
+			</p:toolbarGroup>
+			<p:toolbarGroup align="right">
+				<p:commandButton value="Pesquisa"/>
+			</p:toolbarGroup>
+		</p:toolbar>
+	</ui:define>
+	
+</ui:composition>
