@@ -1,0 +1,61 @@
+<ui:composition template="../WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Novo usuário</ui:define>
+	
+	<ui:define name="tituloConteudo"><h1>Novo usuário</h1></ui:define>
+	
+	<ui:define name="corpo">
+		
+		<p:toolbar>
+			<p:toolbarGroup>
+				<p:button value="Novo" outcome="/usuarios/CadastroUsuario"/>
+				<p:commandButton style="margin-left:5px;" value="Salvar"/>
+			</p:toolbarGroup>
+		</p:toolbar>
+		
+		<p:panelGrid columns="2" id="painel" style="margin-top: 20px; width:100%;"
+			columnClasses="rotulo, campo">
+
+			<p:outputLabel value="Nome" for="nome"/>
+			<p:inputText id="nome" size="40" maxlength="50"/>
+			
+			<p:outputLabel value="Usuario" for="login"/>
+			<p:inputText id="login" size="15" maxlength="15"/>	
+			
+			<p:outputLabel value="Senha" for="senha"/>
+			<p:inputText id="senha" size="15" maxlength="15"/>
+			
+			<p:outputLabel value="Telefone" for="fone"/>
+			<p:inputText id="fone" size="11" maxlength="11"/>
+			
+			<p:outputLabel value="Email" for="email"/>
+			<p:inputText id="email" size="40" maxlength="50"/>
+			
+			<p:outputLabel value="CPF" for="cpf"/>
+			<p:inputText id="cpf" size="13" maxlength="13"/>
+			
+			<p:outputLabel value="Logradouro" for="logradouro"/>
+			<p:inputText id="logradouro" size="50" maxlength="60"/>
+			
+			<p:outputLabel value="Numero" for="numero"/>
+			<p:inputText id="numero" size="5" maxlength="6"/>
+			
+			<p:outputLabel value="Complemento" for="complemento"/>
+			<p:inputText id="complemento" size="30" maxlength="40"/>
+			
+			<p:outputLabel value="Bairro" for="bairro"/>
+			<p:inputText id="bairro" size="40" maxlength="50"/>
+			
+			<p:outputLabel value="Cidade" for="cidade"/>
+			<p:inputText id="cidade" size="30" maxlength="40"/>
+			
+			<p:outputLabel value="UF" for="uf"/>
+			<p:inputText id="uf" size="2" maxlength="2"/>		
+		</p:panelGrid>
+	</ui:define>
+	
+</ui:composition>

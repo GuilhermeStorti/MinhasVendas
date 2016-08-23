@@ -1,0 +1,24 @@
+<ui:composition template="../WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Novo usuário</ui:define>
+	
+	<ui:define name="tituloConteudo"><h1>Novo usuário</h1></ui:define>
+	
+	<ui:define name="corpo">
+		
+		<p:toolbar>
+			<p:toolbarGroup>
+				<p:button value="Novo" outcome="/usuarios/CadastroUsuario"/>
+				<p:commandButton style="margin-left:5px;" value="Salvar"/>
+			</p:toolbarGroup>
+		</p:toolbar>
+		
+		Listar Usuarios!!!
+
+	</ui:define>
+	
+</ui:composition>
