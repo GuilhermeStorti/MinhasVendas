@@ -10,6 +10,8 @@
 	<title><ui:insert name="titulo">Minhas Vendas</ui:insert></title>
 	<script
 		src="#{request.contextPath}/resources/jquery/jquery-3.1.0.min.js"></script>
+	<script
+		src="#{request.contextPath}/resources/jquery/jquery.maskMoney.min.js"></script>
 	<link rel="stylesheet" type="text/css"
 		href="#{request.contextPath}/resources/bootstrap/css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css"
@@ -94,7 +96,7 @@
 	</header>
 
 	<!-- Left side column. contains the logo and sidebar -->
-	<aside class="main-sidebar">
+	<aside class="main-sidebar menu-lateral">
 
 		<!-- sidebar: style can be found in sidebar.less -->
 		<section class="sidebar">
@@ -175,13 +177,21 @@
 
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
-	
-		<i class="fa fa-cog fa-spin fa-3x fa-fw ajax-status"></i>
-		<span class="sr-only">Loading...</span>
-		
+
 		<section class="content-header">
 			<ui:insert name="tituloConteudo" />
 		</section>
+		
+		<p:ajaxStatus onsuccess="configurarMoeda()">
+			<f:facet name="start">
+				<i class="fa fa-cog fa-spin fa-3x fa-fw ajax-status"></i>
+				<span class="sr-only">Loading...</span>
+			</f:facet>
+			<f:facet name="complete">
+				<h:outputText value=""/>
+			</f:facet>
+		</p:ajaxStatus>
+		
 		<!-- Main content -->
 		<section class="content">
 			<ui:insert name="corpo" />
@@ -206,7 +216,16 @@
 	<script type="text/javascript"
 		src="#{request.contextPath}/resources/dist/js/app.min.js"></script>
 	<!-- Correio -->
-
+	
+	<script>
+		function configurarMoeda() {
+			$(".moeda").maskMoney({decimal: ",", thousands: ".", allowZero: true});
+		}
+		
+		$(document).ready(function() {
+			configurarMoeda();
+		});
+	</script>
 
 </h:body>
 </html>

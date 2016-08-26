@@ -11,16 +11,33 @@
 	<ui:define name="corpo">
 		
 		<p:toolbar>
-			<p:toolbarGroup>
-				<p:button value="Novo" outcome="/fabricantes/GerenciarFabricantes"/>
-				<p:commandButton style="margin-left:5px;" value="Salvar"/>
-			</p:toolbarGroup>
 			<p:toolbarGroup align="right">
-				<p:commandButton value="Pesquisa"/>
+				<p:button value="Novo" outcome="/fabricantes/CadastroFabricante"/>
 			</p:toolbarGroup>
 		</p:toolbar>
 		
-		Listar Todos!!!
+		<h:form id="frm" style="margin-top: 10px;">
+			<p:panelGrid columns="2" id="painelBusca" style="margin-bottom:10px;">
+				<p:inputText id="campoBusca" value="Buscar nome:" onclick="value=''"/>
+				<p:commandButton value="Buscar" action="#{fabricantesBean.buscar}"/>
+			</p:panelGrid>
+				
+			<p:dataTable value="#{fabricantesBean.fabricantes}" var="fabricante"
+				rows="10" paginator="true" paginatorPosition="bottom"
+				paginatorAlwaysVisible="false" rowsPerPageTemplate="10,20,30"
+				emptyMessage="Nenhum registro encontrado.">
+				<p:column headerText="Código" style="text-align: center"
+					sortBy="#{fabricante.idFabricante}">
+					<h:outputText value="#{fabricante.idFabricante}" />
+				</p:column>
+				<p:column headerText="Nome"	sortBy="#{fabricante.nome}">
+					<h:outputText value="#{fabricante.nome}" />
+				</p:column>
+				<p:column headerText="Descrição" sortBy="#{fabricante.descricao}">
+					<h:outputText value="#{fabricante.descricao}" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
 	</ui:define>
 	
 </ui:composition>

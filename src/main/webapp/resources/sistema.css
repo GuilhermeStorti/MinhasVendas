@@ -3,6 +3,12 @@
 }
 
 .ajax-status{
-	margin-left: 46%;
-	margin-top: 10px;
+	float: right;
+	font-size: 2em;
+	margin-top: -26px;
+	margin-right: 5%;
+}
+
+.menu-lateral {
+	height:auto !important;
 }

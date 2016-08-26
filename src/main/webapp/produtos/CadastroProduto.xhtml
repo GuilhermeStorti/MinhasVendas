@@ -16,7 +16,7 @@
 				<p:commandButton style="margin-left:5px;" value="Salvar" />
 			</p:toolbarGroup>
 			<p:toolbarGroup align="right">
-				<p:commandButton value="Pesquisa"/>
+				<p:button value="Pesquisa" outcome="/produtos/GerenciarProdutos"/>
 			</p:toolbarGroup>
 		</p:toolbar>
 		
@@ -37,7 +37,7 @@
 			</p:selectOneMenu>	
 			
 			<p:outputLabel value="Valor unitário" for="valorunitario"/>
-			<p:inputText id="valorunitario" size="10" maxlength="10"/>
+			<p:inputText styleClass="moeda" id="valorunitario" size="10" maxlength="10"/>
 			
 			<p:outputLabel value="Estoque" for="estoque"/>
 			<p:inputText id="estoque" size="10" maxlength="10"/>

@@ -4,20 +4,55 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-	<ui:define name="titulo">Novo usuário</ui:define>
+	<ui:define name="titulo">Gerenciar usuários</ui:define>
 	
-	<ui:define name="tituloConteudo"><h1>Novo usuário</h1></ui:define>
+	<ui:define name="tituloConteudo"><h1>Gerenciar usuários</h1></ui:define>
 	
 	<ui:define name="corpo">
 		
 		<p:toolbar>
-			<p:toolbarGroup>
-				<p:button value="Novo" outcome="/usuarios/CadastroUsuario"/>
-				<p:commandButton style="margin-left:5px;" value="Salvar"/>
+			<p:toolbarGroup align="right">
+				<p:button value="Novo" outcome="/usuarios/CadastroUsuario" />
 			</p:toolbarGroup>
 		</p:toolbar>
 		
-		Listar Usuarios!!!
+		<h:form id="frm" style="margin-top:10px;">
+			
+			<p:panelGrid columns="2" id="painelBusca">
+				<p:inputText id="campoBusca" value="Buscar:" onclick="value=''"/>
+				<p:commandButton value="Buscar" action="#{funcionariosBean.buscar}"/>
+			</p:panelGrid>
+			
+			<p:dataTable value="#{funcionariosBean.funcionarios}" var="funcionario"
+				sortBy="#{funcionario.matricula}" rows="10" paginator="true" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom" rowsPerPageTemplate="10, 20, 30"
+				emptyMessage="Nenhum registro encontrado." style="margin-top:10px;">
+				<p:column headerText="Matrícula" style="text-align: center;"
+					 width="110" sortBy="#{funcionario.matricula}" >
+					<h:outputText value="#{funcionario.matricula}"/>
+				</p:column>
+				<p:column headerText="Nome" style="min-width: 150px;"
+					sortBy="#{funcionario.nome}">
+					<h:outputText value="#{funcionario.nome}"/>
+				</p:column>
+				<p:column headerText="Data de admissão" style="text-align: center;" width="180"
+					sortBy="#{funcionario.dataAdmissao}">
+					<h:outputText value="#{funcionario.dataAdmissao}">
+						<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText>
+				</p:column>
+				<p:column headerText="Salário" width="140" style="text-align: right"
+					sortBy="#{funcionario.salario}">
+					<h:outputText value="#{funcionario.salario}">
+						<f:convertNumber type="currency" locale="pt_BR"/>
+					</h:outputText>
+				</p:column>
+				<p:column width="110">
+					<p:button icon="ui-icon-pencil"/>
+					<p:button icon="ui-icon-trash" style="margin-left:5px;"/>
+				</p:column>
+			</p:dataTable>
+		</h:form>
 
 	</ui:define>
 	

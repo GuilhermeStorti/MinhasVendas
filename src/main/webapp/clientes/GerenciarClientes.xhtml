@@ -11,16 +11,36 @@
 	<ui:define name="corpo">
 		
 		<p:toolbar>
-			<p:toolbarGroup>
-				<p:button value="Novo" outcome="/clientes/CadastroCliente"/>
-				<p:commandButton style="margin-left:5px;" value="Salvar"/>
-			</p:toolbarGroup>
 			<p:toolbarGroup align="right">
-				<p:commandButton value="Pesquisa"/>
+				<p:button value="Novo" outcome="/clientes/CadastroCliente"/>
 			</p:toolbarGroup>
 		</p:toolbar>
 		
-		Listar todos!!
+		<h:form id="frm" style="margin-top: 10px;">
+			<p:panelGrid columns="2" id="painelBusca">
+				<p:inputText id="campoBusca" value="Buscar nome:" onclick="value=''"/>
+				<p:commandButton value="Buscar" action="#{clientesBean.buscar}"/>
+			</p:panelGrid>		
+		
+			<p:dataTable value="#{clientesBean.clientes}" var="cliente"
+				rows="10" paginator="true" paginatorPosition="bottom"
+				paginatorAlwaysVisible="false" rowsPerPageTemplate="10,20,30"
+				emptyMessage="Nenhum registro encontrado." style="margin-top: 10px;">
+				<p:column headerText="Código" style="text-align: center"
+					sortBy="#{cliente.idcliente}">
+					<h:outputText value="#{cliente.idcliente}" />
+				</p:column>
+				<p:column headerText="Nome"	sortBy="#{cliente.nome}">
+					<h:outputText value="#{cliente.nome}" />
+				</p:column>
+				<p:column headerText="Telefone" sortBy="#{cliente.telefone}">
+					<h:outputText value="#{cliente.telefone}" />
+				</p:column>
+				<p:column headerText="CPF" sortBy="#{cliente.cpf}">
+					<h:outputText value="#{cliente.cpf}" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
 	</ui:define>
 	
 </ui:composition>

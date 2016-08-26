@@ -11,16 +11,29 @@
 	<ui:define name="corpo">
 		
 		<p:toolbar>
-			<p:toolbarGroup>
-				<p:button value="Novo" outcome="/produtos/CadastroTipoProduto"/>
-				<p:commandButton style="margin-left:5px;" value="Salvar" />
-			</p:toolbarGroup>
 			<p:toolbarGroup align="right">
-				<p:commandButton value="Pesquisa"/>
+				<p:button value="Novo" outcome="/produtos/CadastroTipoProduto"/>
 			</p:toolbarGroup>
 		</p:toolbar>
 		
-		Listar Todos!!
+		<h:form id="frm" style="margin-top: 10px;">
+			<p:panelGrid columns="2" id="painelBusca" style="margin-bottom:10px;">
+				<p:inputText id="campoBusca" value="Buscar descrição:" onclick="value=''"/>
+				<p:commandButton value="Buscar" action="#{tipoProdutoBean.buscar}"/>
+			</p:panelGrid>
+			
+			<p:dataTable value="#{tipoProdutoBean.tiposProduto}" var="tipoProduto"
+				rows="10" paginator="true" paginatorPosition="bottom"
+				paginatorAlwaysVisible="false" emptyMessage="Nenhum registro encontrado."
+				rowsPerPageTemplate="10, 20, 30">
+				<p:column headerText="Código" sortBy="#{tipoProduto.idTipoProduto}">
+					<h:outputText value="#{tipoProduto.idTipoProduto}" style="text-align:center;"/>
+				</p:column>
+				<p:column headerText="Descrição" sortBy="#{tipoProduto.descricao}">
+					<h:outputText value="#{tipoProduto.descricao}"/>
+				</p:column>
+			</p:dataTable>
+		</h:form>
 	</ui:define>
 	
 </ui:composition>
