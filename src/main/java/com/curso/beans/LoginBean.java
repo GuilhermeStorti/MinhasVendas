@@ -1,35 +1,43 @@
 package com.curso.beans;
 
+import com.curso.entidades.Funcionario;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
 /**
- * Created by guilherme on 10/10/16.
+ *
+ * @author guilherme
  */
 @ManagedBean(name = "loginBean")
-@RequestScoped
+@SessionScoped
 public class LoginBean {
-    public LoginBean() {
-        limpar();
-    }
 
+    public LoginBean() {
+        this.funcionario = new Funcionario();
+        usuario = "";
+        senha = ""; 
+    }
+    
+    private Funcionario funcionario;
     private String usuario;
     private String senha;
-
+    
     public void entrar(){
-        if (!usuario.isEmpty() && usuario != null && !senha.isEmpty() && senha != null) {
-            if(usuario.equals("Guilherme") && senha.equals("123")){
-                System.out.println("OK!!!");
-                limpar();
-            }else{
-                System.out.println("Errado!");
-            }
-        }
+        System.out.println("teste");
+    }
+    
+    public void limpar(){
+        System.out.println("teste");
+        usuario = "";
+        senha = "";
     }
 
-    public void limpar(){
-        usuario = null;
-        senha = null;
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
     }
 
     public String getUsuario() {
@@ -47,4 +55,6 @@ public class LoginBean {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+    
+    
 }

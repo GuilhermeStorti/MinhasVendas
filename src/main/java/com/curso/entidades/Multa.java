@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.MinhasVendas.models;
+package com.curso.entidades;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -25,44 +25,44 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author guilherme
  */
 @Entity
-@Table(name = "status")
+@Table(name = "Multa")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Status.findAll", query = "SELECT s FROM Status s"),
-    @NamedQuery(name = "Status.findByIdStatus", query = "SELECT s FROM Status s WHERE s.idStatus = :idStatus"),
-    @NamedQuery(name = "Status.findByDescricao", query = "SELECT s FROM Status s WHERE s.descricao = :descricao")})
-public class Status implements Serializable {
+    @NamedQuery(name = "Multa.findAll", query = "SELECT m FROM Multa m")
+    , @NamedQuery(name = "Multa.findByIdMulta", query = "SELECT m FROM Multa m WHERE m.idMulta = :idMulta")
+    , @NamedQuery(name = "Multa.findByDescricao", query = "SELECT m FROM Multa m WHERE m.descricao = :descricao")})
+public class Multa implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_status")
-    private Long idStatus;
+    @Column(name = "idMulta")
+    private Integer idMulta;
     @Basic(optional = false)
     @Column(name = "descricao")
     private String descricao;
-    @OneToMany(mappedBy = "idStatus")
-    private Collection<Pedido> pedidoCollection;
+    @ManyToMany(mappedBy = "multaList")
+    private List<Locacao> locacaoList;
 
-    public Status() {
+    public Multa() {
     }
 
-    public Status(Long idStatus) {
-        this.idStatus = idStatus;
+    public Multa(Integer idMulta) {
+        this.idMulta = idMulta;
     }
 
-    public Status(Long idStatus, String descricao) {
-        this.idStatus = idStatus;
+    public Multa(Integer idMulta, String descricao) {
+        this.idMulta = idMulta;
         this.descricao = descricao;
     }
 
-    public Long getIdStatus() {
-        return idStatus;
+    public Integer getIdMulta() {
+        return idMulta;
     }
 
-    public void setIdStatus(Long idStatus) {
-        this.idStatus = idStatus;
+    public void setIdMulta(Integer idMulta) {
+        this.idMulta = idMulta;
     }
 
     public String getDescricao() {
@@ -74,29 +74,29 @@ public class Status implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Pedido> getPedidoCollection() {
-        return pedidoCollection;
+    public List<Locacao> getLocacaoList() {
+        return locacaoList;
     }
 
-    public void setPedidoCollection(Collection<Pedido> pedidoCollection) {
-        this.pedidoCollection = pedidoCollection;
+    public void setLocacaoList(List<Locacao> locacaoList) {
+        this.locacaoList = locacaoList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idStatus != null ? idStatus.hashCode() : 0);
+        hash += (idMulta != null ? idMulta.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Status)) {
+        if (!(object instanceof Multa)) {
             return false;
         }
-        Status other = (Status) object;
-        if ((this.idStatus == null && other.idStatus != null) || (this.idStatus != null && !this.idStatus.equals(other.idStatus))) {
+        Multa other = (Multa) object;
+        if ((this.idMulta == null && other.idMulta != null) || (this.idMulta != null && !this.idMulta.equals(other.idMulta))) {
             return false;
         }
         return true;
@@ -104,7 +104,7 @@ public class Status implements Serializable {
 
     @Override
     public String toString() {
-        return "mapeando.Status[ idStatus=" + idStatus + " ]";
+        return "com.curso.entidades.Multa[ idMulta=" + idMulta + " ]";
     }
     
 }

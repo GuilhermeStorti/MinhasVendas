@@ -2,7 +2,6 @@
 	  xmlns:ui="http://java.sun.com/jsf/facelets"
 	  xmlns:f="http://java.sun.com/jsf/core"
 	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:pe="http://primefaces.org/ui/extensions"
 	  xmlns:p="http://primefaces.org/ui">
 
 <h:head>
@@ -34,14 +33,16 @@
 		<h:form id="frm" styleClass="login-form">
 			<h1>Login</h1>
 			<h:panelGrid columns="2" style="text-align: center;">
-				<p:outputLabel value="Login: " for="login"/>
-				<p:inputText value="#{loginBean.usuario}" id="login" size="30" maxlength="30" style="margin-bottom: 5px; margin-left: 5px;"/>
+				<p:outputLabel value="Usuario: " for="login"/>
+					<p:inputText value="#{loginBean.usuario}" id="login" size="30" maxlength="15" style="margin-bottom: 5px; margin-left: 5px;"/>
 				<p:outputLabel value="Senha: " for="senha"/>
-				<p:password value="#{loginBean.senha}" id="senha" size="30" maxlength="30" style="margin-bottom: 5px; margin-left: 5px;"/>
+					<p:password value="#{loginBean.senha}" id="senha" size="30" maxlength="6" style="margin-bottom: 5px; margin-left: 5px;"/>
 				<p:column/>
 				<p:column>
-					<p:commandButton value="Limpar" action="#{loginBean.limpar}"/>
-					<p:commandButton value="Entrar" style="margin-left: 46px;" action="#{loginBean.entrar}"/>
+					<p:commandButton value="Limpar" action="#{loginBean.limpar()}">
+						<f:ajax execute="@form" render="@form"/>
+					</p:commandButton>
+					<p:commandButton value="Entrar" style="margin-left: 46px;" action="#{loginBean.entrar()}"/>
 				</p:column>
 			</h:panelGrid>
 		</h:form>
