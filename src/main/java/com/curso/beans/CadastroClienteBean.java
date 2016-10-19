@@ -20,6 +20,7 @@ public class CadastroClienteBean {
 
     public void cadastrar(){
         System.out.println("Cadastrar");
+        limpar();
     }
 
     public void limpar(){

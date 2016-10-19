@@ -13,10 +13,10 @@
 		<p:toolbar>
 			<p:toolbarGroup>
 				<p:button value="Novo" outcome="/clientes/CadastroCliente"/>
-				<p:commandButton style="margin-left:5px;" value="Salvar" action="#{cadastroClienteBean.cadastrar}"/>
+				<p:commandButton style="margin-left:5px;" value="Salvar" action="#{cadastroClienteBean.cadastrar}" update="form"/>
 			</p:toolbarGroup>
 			<p:toolbarGroup align="right">
-				<p:button value="Pesquisar" outcome="/clientes/GerenciarClientes"/>
+				<p:commandButton value="Pesquisar" action="#{cadastroClienteBean.limpar}" update="form"/>
 			</p:toolbarGroup>
 		</p:toolbar>
 
@@ -30,14 +30,6 @@
 
 				<p:outputLabel value="CPF" for="cpf"/>
 				<p:inputText id="cpf" size="11" maxlength="11" value="#{cadastroClienteBean.cliente.cpf}"/>
-
-				<p:column/>
-
-				<p:column>
-					<p:commandButton value="Limpar" action="#{cadastroClienteBean.limpar}">
-						<f:ajax execute="@form" render="@form"/>
-					</p:commandButton>
-				</p:column>
 			</p:panelGrid>
 		</h:form>
 	</ui:define>

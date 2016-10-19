@@ -39,9 +39,7 @@
 					<p:password value="#{loginBean.senha}" id="senha" size="30" maxlength="6" style="margin-bottom: 5px; margin-left: 5px;"/>
 				<p:column/>
 				<p:column>
-					<p:commandButton value="Limpar" action="#{loginBean.limpar()}">
-						<f:ajax execute="@form" render="@form"/>
-					</p:commandButton>
+					<p:commandButton value="Limpar" action="#{loginBean.limpar()}" update="frm"/>
 					<p:commandButton value="Entrar" style="margin-left: 46px;" action="#{loginBean.entrar()}"/>
 				</p:column>
 			</h:panelGrid>
