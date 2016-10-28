@@ -1,9 +1,11 @@
 package com.curso.beans;
 
 import com.curso.entidades.Cliente;
+import com.curso.utils.JpaUtil;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.persistence.EntityManager;
 
 /**
  * Created by guilherme on 12/10/16.
@@ -18,8 +20,13 @@ public class CadastroClienteBean {
 
     private Cliente cliente;
 
-    public void cadastrar(){
-        System.out.println("Cadastrar");
+    public void salvar(){
+        EntityManager manager = JpaUtil.getManager();
+        manager.getTransaction().begin();
+        manager.merge(cliente);
+        manager.getTransaction().commit();
+        JpaUtil.closeManager(manager);
+
         limpar();
     }
 

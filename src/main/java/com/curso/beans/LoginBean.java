@@ -1,8 +1,13 @@
 package com.curso.beans;
 
 import com.curso.entidades.Funcionario;
+import com.curso.utils.JpaUtil;
+
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.persistence.EntityManager;
+import java.util.List;
 
 /**
  *
@@ -23,7 +28,16 @@ public class LoginBean {
     private String senha;
     
     public void entrar(){
-        System.out.println("teste");
+        EntityManager manager = JpaUtil.getManager();
+        List<Funcionario> funcionarios = manager.createQuery("from Funcionario", Funcionario.class).getResultList();
+        for(Funcionario f : funcionarios){
+            if(f.getUsuario().equals(usuario) && f.getSenha().equals(senha)){
+                System.out.println("Seja Bem vindo!!");
+            }else {
+                System.out.println("Dados Invalidos!!");
+            }
+            JpaUtil.closeManager(manager);
+        }
     }
     
     public void limpar(){
