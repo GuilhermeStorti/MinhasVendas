@@ -11,8 +11,22 @@
 
     <ui:define name="corpo">
 
-        CORPOOOOO
-        <!--Trabalhe aqui!!-->
+        <p:toolbar>
+            <p:toolbarGroup>
+                <p:button value="Novo" outcome="/multas/CadastrarMulta"/>
+                <p:commandButton style="margin-left:5px;" value="Salvar" action="#{cadastrarMultaBean.salvar()}" update="form" />
+            </p:toolbarGroup>
+            <p:toolbarGroup align="right">
+				<p:button value="Pesquisar" outcome="/multas/GerenciarMultas" update="form"/>
+            </p:toolbarGroup>
+        </p:toolbar>
+        
+        <h:form id="form">
+            <p:panelGrid columns="2" id="painel" style="margin-top: 20px; width:100%;" columnClasses="rotulo, campo">
+                <p:outputLabel value="Descrição" for="descricao"/>
+                <p:inputText id="descricao" size="50" maxlength="50" value="#{cadastrarMultaBean.multa.descricao}" />
+            </p:panelGrid>
+        </h:form>
 
     </ui:define>
 

@@ -1,11 +1,43 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h:outputLabel value="Hello, world"/>
-</f:view>
-</html>
+<ui:composition template="../WEB-INF/template/LayoutPadrao.xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="titulo">Gerenciar multas</ui:define>
+
+    <ui:define name="tituloConteudo"><h1>Gerenciar multas</h1></ui:define>
+
+    <ui:define name="corpo">
+
+        <p:toolbar>
+            <p:toolbarGroup align="right">
+                <p:button value="Novo" outcome="/multas/CadastrarMulta"/>
+            </p:toolbarGroup>
+        </p:toolbar>
+
+        <h:form id="frm" style="margin-top: 10px;">
+
+            <p:dataTable var="multa"
+                         rows="10" paginator="true" paginatorPosition="bottom"
+                         paginatorAlwaysVisible="false" rowsPerPageTemplate="10,20,30"
+                         emptyMessage="Nenhum registro encontrado." style="margin-top: 10px;" id="table">
+
+                <p:column headerText="Código" sortBy="#{multa.idMulta}" width="8%" styleClass="center">
+                    <h:outputText value="#{multa.idMulta}"/>
+                </p:column>
+                <p:column headerText="Descrição:" sortBy="#{multa.descricao}" filterBy="#{multa.descricao}" styleClass="center">
+                    <h:outputText value="#{multa.descricao}" />
+                </p:column>
+
+                <p:column width="5%" styleClass="center">
+                    <p:commandLink action="#{gerenciarMultasBean.editar(multa)}" styleClass="fa fa-pencil" title="Editar" ajax="false"/>
+                    <p:spacer width="15px;"/>
+                    <p:commandLink styleClass="fa fa-trash" title="Excluir" action="#{gerenciarMultasBean.excluir(multa)}" ajax="false"/>
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
