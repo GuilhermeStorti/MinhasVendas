@@ -6,7 +6,9 @@ import com.curso.utils.JpaUtil;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -33,6 +35,11 @@ public class LoginBean {
         for(Funcionario f : funcionarios){
             if(f.getUsuario().equals(usuario) && f.getSenha().equals(senha)){
                 System.out.println("Seja Bem vindo!!");
+                try {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("/Home.xhtml");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }else {
                 System.out.println("Dados Invalidos!!");
             }

@@ -17,30 +17,28 @@
 		</p:toolbar>
 		
 		<h:form id="frm" style="margin-top: 10px;">
-			<p:panelGrid columns="2" id="painelBusca">
-				<p:inputText id="campoBusca" value="Buscar nome:" onclick="value=''"/>
-				<p:commandButton value="Buscar" action="#{clientesBean.buscar}"/>
-			</p:panelGrid>
 
-			<p:commandButton value="Teste" ajax="false" action="#{gerenciarClientesBean.carregarLista}"/>
-		
 			<p:dataTable value="#{gerenciarClientesBean.clientes}" var="cliente"
 				rows="10" paginator="true" paginatorPosition="bottom"
 				paginatorAlwaysVisible="false" rowsPerPageTemplate="10,20,30"
 				emptyMessage="Nenhum registro encontrado." style="margin-top: 10px;" id="table">
 
-				<p:column headerText="Código" style="text-align: center"
-					sortBy="#{cliente.idCliente}">
-					<h:outputText value="#{cliente.idCliente}" />
+				<p:column headerText="Código" sortBy="#{cliente.idCliente}" width="6%" styleClass="center">
+					<h:outputText value="#{cliente.idCliente}"/>
 				</p:column>
-				<p:column headerText="Nome"	sortBy="#{cliente.nome}">
+				<p:column headerText="Nome"	sortBy="#{cliente.nome}" filterBy="#{cliente.nome}" styleClass="center">
 					<h:outputText value="#{cliente.nome}" />
 				</p:column>
-				<p:column headerText="Telefone" sortBy="#{cliente.telefone}">
+				<p:column headerText="Telefone" sortBy="#{cliente.telefone}" styleClass="center">
 					<h:outputText value="#{cliente.telefone}" />
 				</p:column>
-				<p:column headerText="CPF" sortBy="#{cliente.cpf}">
+				<p:column headerText="CPF" sortBy="#{cliente.cpf}" styleClass="center">
 					<h:outputText value="#{cliente.cpf}" />
+				</p:column>
+				<p:column width="5%" styleClass="center">
+					<p:commandLink action="#{gerenciarClientesBean.editar(cliente)}" styleClass="fa fa-pencil" title="Editar" ajax="false"/>
+					<p:spacer width="15px;"/>
+					<p:commandLink styleClass="fa fa-trash" title="Excluir" action="#{gerenciarClientesBean.excluir(cliente)}" ajax="false"/>
 				</p:column>
 
 			</p:dataTable>

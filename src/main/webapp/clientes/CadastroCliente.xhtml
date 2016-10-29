@@ -16,7 +16,7 @@
 				<p:commandButton style="margin-left:5px;" value="Salvar" action="#{cadastroClienteBean.salvar}" update="form"/>
 			</p:toolbarGroup>
 			<p:toolbarGroup align="right">
-				<p:commandButton value="Pesquisar" action="#{cadastroClienteBean.limpar}" update="form"/>
+				<p:button value="Pesquisar" outcome="/clientes/GerenciarClientes" update="form"/>
 			</p:toolbarGroup>
 		</p:toolbar>
 
@@ -29,7 +29,7 @@
 				<p:inputText id="telefone" size="11" maxlength="11" value="#{cadastroClienteBean.cliente.telefone}"/>
 
 				<p:outputLabel value="CPF" for="cpf"/>
-				<p:inputText id="cpf" size="11" maxlength="11" value="#{cadastroClienteBean.cliente.cpf}"/>
+				<p:inputMask mask="999.999.999-99" id="cpf" size="14" value="#{cadastroClienteBean.cliente.cpf}"/>
 			</p:panelGrid>
 		</h:form>
 	</ui:define>
