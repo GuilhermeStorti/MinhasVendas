@@ -5,15 +5,39 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui">
 
-    <ui:define name="titulo">Cadastrar Funcionario</ui:define>
+   
+    <ui:define name="titulo">Novo Funcionario</ui:define>
+	
+	<ui:define name="tituloConteudo"><h1>Novo Funcionario</h1></ui:define>
+	
+	<ui:define name="corpo">
+		
+		<p:toolbar>
+			<p:toolbarGroup>
+				
+				<p:commandButton style="margin-left:5px;" value="Salvar"  update="form"/>
+			</p:toolbarGroup>
+			<p:toolbarGroup align="right">
+				<p:button value="Pesquisar" />
+			</p:toolbarGroup>
+		</p:toolbar>
 
-    <ui:define name="titulo">Cadastrar Funcionario</ui:define>
+		<h:form id="form">
+			<p:panelGrid columns="2" id="painel" style="margin-top: 20px; width:100%;" columnClasses="rotulo, campo">
+				<p:outputLabel value="Nome" for="nome"/>
+				<p:inputText id="nome" size="50" maxlength="50" />
 
-    <ui:define name="corpo">
+				
 
-        CORPOOOOO
-        <!--Trabalhe aqui!!-->
-
-    </ui:define>
+				<p:outputLabel value="CPF" for="cpf"/>
+				<p:inputMask mask="999.999.999-99" id="cpf" size="14" />
+                                
+                                <p:outputLabel value="Data de nascimento" />
+				<p:inputText  size="11" maxlength="11" />
+                                
+                                
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
 
 </ui:composition>
