@@ -30,6 +30,9 @@
 
 				<p:outputLabel value="CPF" for="cpf"/>
 				<p:inputMask mask="999.999.999-99" id="cpf" size="14" value="#{cadastroClienteBean.cliente.cpf}"/>
+
+				<p:outputLabel value="CNH" for="cnh"/>
+				<p:inputMask mask="" id="cnh" size="14" value="#{cadastroClienteBean.cliente.cnh}"/>
 			</p:panelGrid>
 		</h:form>
 	</ui:define>

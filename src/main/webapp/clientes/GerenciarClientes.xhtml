@@ -35,10 +35,19 @@
 				<p:column headerText="CPF" sortBy="#{cliente.cpf}" styleClass="center">
 					<h:outputText value="#{cliente.cpf}" />
 				</p:column>
-				<p:column width="5%" styleClass="center">
+				<p:column headerText="CNH" sortBy="#{cliente.cnh}" styleClass="center">
+					<h:outputText value="#{cliente.cnh}" />
+				</p:column>
+				<p:column headerText="Situacão" width="10%" sortBy="#{cliente.situacao}" styleClass="center">
+					<h:outputText value="#{cliente.situacao}" />
+				</p:column>
+				<p:column width="5%" styleClass="center" >
 					<p:commandLink action="#{gerenciarClientesBean.editar(cliente)}" styleClass="fa fa-pencil" title="Editar" ajax="false"/>
 					<p:spacer width="15px;"/>
-					<p:commandLink styleClass="fa fa-trash" title="Excluir" action="#{gerenciarClientesBean.excluir(cliente)}" ajax="false"/>
+					<p:commandLink styleClass="fa fa-thumbs-o-down" title="Inativar" action="#{gerenciarClientesBean.inativar(cliente)}"
+								   ajax="false" rendered="#{gerenciarClientesBean.validar(cliente)}"/>
+					<p:commandLink styleClass="fa fa-thumbs-o-up" title="Ativar" action="#{gerenciarClientesBean.ativar(cliente)}"
+								   ajax="false"  rendered="#{!gerenciarClientesBean.validar(cliente)}"/>
 				</p:column>
 
 			</p:dataTable>

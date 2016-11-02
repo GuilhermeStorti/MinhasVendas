@@ -29,7 +29,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Cliente.findByIdCliente", query = "SELECT c FROM Cliente c WHERE c.idCliente = :idCliente")
     , @NamedQuery(name = "Cliente.findByNome", query = "SELECT c FROM Cliente c WHERE c.nome = :nome")
     , @NamedQuery(name = "Cliente.findByTelefone", query = "SELECT c FROM Cliente c WHERE c.telefone = :telefone")
-    , @NamedQuery(name = "Cliente.findByCpf", query = "SELECT c FROM Cliente c WHERE c.cpf = :cpf")})
+    , @NamedQuery(name = "Cliente.findByCpf", query = "SELECT c FROM Cliente c WHERE c.cpf = :cpf")
+    , @NamedQuery(name = "Cliente.findByCnh", query = "SELECT c FROM Cliente c WHERE c.cnh = :cnh")
+    , @NamedQuery(name = "Cliente.findBySituacao", query = "SELECT c FROM Cliente c WHERE c.situacao = :situacao")})
 public class Cliente implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,6 +47,10 @@ public class Cliente implements Serializable {
     private String telefone;
     @Column(name = "cpf")
     private String cpf;
+    @Column(name = "cnh")
+    private String cnh;
+    @Column(name = "situacao")
+    private char situacao;
 
     public Cliente() {
     }
@@ -88,6 +94,22 @@ public class Cliente implements Serializable {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public String getCnh() {
+        return cnh;
+    }
+
+    public void setCnh(String cnh) {
+        this.cnh = cnh;
+    }
+
+    public char getSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(char situacao) {
+        this.situacao = situacao;
     }
 
     @Override

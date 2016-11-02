@@ -4,6 +4,7 @@ import com.curso.entidades.Funcionario;
 import com.curso.utils.JpaUtil;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -30,20 +31,25 @@ public class LoginBean {
     private String senha;
     
     public void entrar(){
-        EntityManager manager = JpaUtil.getManager();
-        List<Funcionario> funcionarios = manager.createQuery("from Funcionario", Funcionario.class).getResultList();
-        for(Funcionario f : funcionarios){
-            if(f.getUsuario().equals(usuario) && f.getSenha().equals(senha)){
-                System.out.println("Seja Bem vindo!!");
-                try {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect("/Home.xhtml");
-                } catch (IOException e) {
-                    e.printStackTrace();
+        try {
+            EntityManager manager = JpaUtil.getManager();
+            List<Funcionario> funcionarios = manager.createQuery("from Funcionario", Funcionario.class).getResultList();
+            for(Funcionario f : funcionarios){
+                if(f.getUsuario().equals(usuario) && f.getSenha().equals(senha)){
+                    System.out.println("Seja Bem vindo!!");
+                    try {
+                        FacesContext.getCurrentInstance().getExternalContext().redirect("/Home.xhtml");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }else {
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!", "Usuario ou senha invalidos."));
+                    System.out.println("Dados Invalidos!!");
                 }
-            }else {
-                System.out.println("Dados Invalidos!!");
+                JpaUtil.closeManager(manager);
             }
-            JpaUtil.closeManager(manager);
+        }catch (Exception ex){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro no sistema!", ex.getMessage()));
         }
     }
     

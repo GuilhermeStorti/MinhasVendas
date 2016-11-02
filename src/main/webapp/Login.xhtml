@@ -30,17 +30,20 @@
 		<span class="logo-lg login-logo" ><b>Ti</b>Talibã</span>
 	</div>
 	<div id="login-dialog" class="login-dialog">
-		<h:form id="frm" styleClass="login-form">
+		<h:form id="frm" styleClass="login-form" >
 			<h1>Login</h1>
+
+			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" style="width: 100%"/>
+
 			<h:panelGrid columns="2" style="text-align: center;">
 				<p:outputLabel value="Usuario: " for="login"/>
-					<p:inputText value="#{loginBean.usuario}" id="login" size="30" maxlength="15" style="margin-bottom: 5px; margin-left: 5px;"/>
+					<p:inputText value="#{loginBean.usuario}" id="login" size="30" maxlength="15" style="margin-bottom: 5px; margin-left: 5px;" tabindex="1"/>
 				<p:outputLabel value="Senha: " for="senha"/>
-					<p:password value="#{loginBean.senha}" id="senha" size="30" maxlength="6" style="margin-bottom: 5px; margin-left: 5px;"/>
+					<p:password value="#{loginBean.senha}" id="senha" size="30" maxlength="6" style="margin-bottom: 5px; margin-left: 5px;" tabindex="2"/>
 				<p:column/>
 				<p:column>
-					<p:commandButton value="Limpar" action="#{loginBean.limpar()}" update="frm"/>
-					<p:commandButton value="Entrar" style="margin-left: 46px;" action="#{loginBean.entrar()}" ajax="false"/>
+					<p:commandButton value="Limpar" action="#{loginBean.limpar()}" update="frm" tabindex="3"/>
+					<p:commandButton value="Entrar" style="margin-left: 46px;" action="#{loginBean.entrar()}" ajax="false" tabindex="4"/>
 				</p:column>
 			</h:panelGrid>
 		</h:form>
