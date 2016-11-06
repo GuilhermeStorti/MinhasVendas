@@ -47,8 +47,7 @@
 		<dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
-			<version>5.3</version>
-			<scope>compile</scope>
+			<version>6.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.primefaces.themes</groupId>
@@ -88,16 +87,5 @@
 			</plugin>
 		</plugins>
 	</build>
-
-
-	<repositories>
-		<!-- Repositorio do Primefaces -->
-		<repository>
-			<id>prime-repo</id>
-			<name>PrimeFaces Maven Repository</name>
-			<url>http://repository.primefaces.org</url>
-			<layout>default</layout>
-		</repository>
-	</repositories>
 
 </project>

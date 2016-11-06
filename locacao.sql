@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Tempo de geração: 24/10/2016 às 11:14
--- Versão do servidor: 10.1.13-MariaDB
--- Versão do PHP: 7.0.6
+-- Generation Time: Nov 06, 2016 at 03:01 
+-- Server version: 10.1.16-MariaDB
+-- PHP Version: 7.0.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `locacao`
+-- Database: `locacao`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `Avaria`
+-- Table structure for table `Avaria`
 --
 
 CREATE TABLE `Avaria` (
@@ -34,7 +34,7 @@ CREATE TABLE `Avaria` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `Categoria`
+-- Table structure for table `Categoria`
 --
 
 CREATE TABLE `Categoria` (
@@ -45,20 +45,34 @@ CREATE TABLE `Categoria` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `Cliente`
+-- Table structure for table `Cliente`
 --
 
 CREATE TABLE `Cliente` (
   `idCliente` int(11) NOT NULL,
   `nome` varchar(50) NOT NULL,
   `telefone` varchar(11) DEFAULT NULL,
-  `cpf` int(11) DEFAULT NULL
+  `cpf` int(11) DEFAULT NULL,
+  `cnh` varchar(15) DEFAULT NULL,
+  `situacao` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Cliente`
+--
+
+INSERT INTO `Cliente` (`idCliente`, `nome`, `telefone`, `cpf`, `cnh`, `situacao`) VALUES
+(1, 'asdas', '1122', 1222, '2212', 'I'),
+(2, 'asdas', '1122', 1222, '2212', 'I'),
+(3, 'Guilherme', '1234', 12345, '123456', 'I'),
+(4, 'Rodolfo', '124578', 1245789, '1245786', 'I'),
+(5, 'Testando', '1234', 564654, '6484', '\0'),
+(6, 'asdas', '12423', 12312, '1231', '\0');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `Funcionario`
+-- Table structure for table `Funcionario`
 --
 
 CREATE TABLE `Funcionario` (
@@ -69,10 +83,17 @@ CREATE TABLE `Funcionario` (
   `senha` varchar(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `Funcionario`
+--
+
+INSERT INTO `Funcionario` (`idfuncionario`, `matricula`, `nome`, `usuario`, `senha`) VALUES
+(1, '123', 'Guilherme', 'gui', '123');
+
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `Locacao`
+-- Table structure for table `Locacao`
 --
 
 CREATE TABLE `Locacao` (
@@ -86,7 +107,7 @@ CREATE TABLE `Locacao` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `Locacao_Avaria`
+-- Table structure for table `Locacao_Avaria`
 --
 
 CREATE TABLE `Locacao_Avaria` (
@@ -97,7 +118,7 @@ CREATE TABLE `Locacao_Avaria` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `Locacao_Multa`
+-- Table structure for table `Locacao_Multa`
 --
 
 CREATE TABLE `Locacao_Multa` (
@@ -108,7 +129,7 @@ CREATE TABLE `Locacao_Multa` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `Multa`
+-- Table structure for table `Multa`
 --
 
 CREATE TABLE `Multa` (
@@ -119,7 +140,7 @@ CREATE TABLE `Multa` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `Veiculo`
+-- Table structure for table `Veiculo`
 --
 
 CREATE TABLE `Veiculo` (
@@ -129,35 +150,35 @@ CREATE TABLE `Veiculo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Índices de tabelas apagadas
+-- Indexes for dumped tables
 --
 
 --
--- Índices de tabela `Avaria`
+-- Indexes for table `Avaria`
 --
 ALTER TABLE `Avaria`
   ADD PRIMARY KEY (`idAvaria`);
 
 --
--- Índices de tabela `Categoria`
+-- Indexes for table `Categoria`
 --
 ALTER TABLE `Categoria`
   ADD PRIMARY KEY (`idCategoria`);
 
 --
--- Índices de tabela `Cliente`
+-- Indexes for table `Cliente`
 --
 ALTER TABLE `Cliente`
   ADD PRIMARY KEY (`idCliente`);
 
 --
--- Índices de tabela `Funcionario`
+-- Indexes for table `Funcionario`
 --
 ALTER TABLE `Funcionario`
   ADD PRIMARY KEY (`idfuncionario`);
 
 --
--- Índices de tabela `Locacao`
+-- Indexes for table `Locacao`
 --
 ALTER TABLE `Locacao`
   ADD PRIMARY KEY (`idLocacao`),
@@ -167,7 +188,7 @@ ALTER TABLE `Locacao`
   ADD KEY `fk_Locacao_Funcionario2_idx` (`idFuncionario_rec`);
 
 --
--- Índices de tabela `Locacao_Avaria`
+-- Indexes for table `Locacao_Avaria`
 --
 ALTER TABLE `Locacao_Avaria`
   ADD PRIMARY KEY (`idAvaria`,`idLocacao`),
@@ -175,7 +196,7 @@ ALTER TABLE `Locacao_Avaria`
   ADD KEY `fk_Avaria_has_Locacao_Avaria1_idx` (`idAvaria`);
 
 --
--- Índices de tabela `Locacao_Multa`
+-- Indexes for table `Locacao_Multa`
 --
 ALTER TABLE `Locacao_Multa`
   ADD PRIMARY KEY (`idLocacao`,`idMulta`),
@@ -183,63 +204,63 @@ ALTER TABLE `Locacao_Multa`
   ADD KEY `fk_Locacao_has_Multa_Locacao1_idx` (`idLocacao`);
 
 --
--- Índices de tabela `Multa`
+-- Indexes for table `Multa`
 --
 ALTER TABLE `Multa`
   ADD PRIMARY KEY (`idMulta`);
 
 --
--- Índices de tabela `Veiculo`
+-- Indexes for table `Veiculo`
 --
 ALTER TABLE `Veiculo`
   ADD PRIMARY KEY (`idVeiculo`),
   ADD KEY `fk_Veiculo_Categoria_idx` (`idCategoria`);
 
 --
--- AUTO_INCREMENT de tabelas apagadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de tabela `Avaria`
+-- AUTO_INCREMENT for table `Avaria`
 --
 ALTER TABLE `Avaria`
   MODIFY `idAvaria` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT de tabela `Categoria`
+-- AUTO_INCREMENT for table `Categoria`
 --
 ALTER TABLE `Categoria`
   MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT de tabela `Cliente`
+-- AUTO_INCREMENT for table `Cliente`
 --
 ALTER TABLE `Cliente`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
--- AUTO_INCREMENT de tabela `Funcionario`
+-- AUTO_INCREMENT for table `Funcionario`
 --
 ALTER TABLE `Funcionario`
-  MODIFY `idfuncionario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idfuncionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT de tabela `Locacao`
+-- AUTO_INCREMENT for table `Locacao`
 --
 ALTER TABLE `Locacao`
   MODIFY `idLocacao` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT de tabela `Multa`
+-- AUTO_INCREMENT for table `Multa`
 --
 ALTER TABLE `Multa`
   MODIFY `idMulta` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT de tabela `Veiculo`
+-- AUTO_INCREMENT for table `Veiculo`
 --
 ALTER TABLE `Veiculo`
   MODIFY `idVeiculo` int(11) NOT NULL AUTO_INCREMENT;
 --
--- Restrições para dumps de tabelas
+-- Constraints for dumped tables
 --
 
 --
--- Restrições para tabelas `Locacao`
+-- Constraints for table `Locacao`
 --
 ALTER TABLE `Locacao`
   ADD CONSTRAINT `fk_Locacao_Cliente1` FOREIGN KEY (`idCliente`) REFERENCES `Cliente` (`idCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -248,21 +269,21 @@ ALTER TABLE `Locacao`
   ADD CONSTRAINT `fk_Locacao_Veiculo1` FOREIGN KEY (`idVeiculo`) REFERENCES `Veiculo` (`idVeiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Restrições para tabelas `Locacao_Avaria`
+-- Constraints for table `Locacao_Avaria`
 --
 ALTER TABLE `Locacao_Avaria`
   ADD CONSTRAINT `fk_Avaria_has_Locacao_Avaria1` FOREIGN KEY (`idAvaria`) REFERENCES `Avaria` (`idAvaria`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_Avaria_has_Locacao_Locacao1` FOREIGN KEY (`idLocacao`) REFERENCES `Locacao` (`idLocacao`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Restrições para tabelas `Locacao_Multa`
+-- Constraints for table `Locacao_Multa`
 --
 ALTER TABLE `Locacao_Multa`
   ADD CONSTRAINT `fk_Locacao_has_Multa_Locacao1` FOREIGN KEY (`idLocacao`) REFERENCES `Locacao` (`idLocacao`),
   ADD CONSTRAINT `fk_Locacao_has_Multa_Multa1` FOREIGN KEY (`idMulta`) REFERENCES `Multa` (`idMulta`);
 
 --
--- Restrições para tabelas `Veiculo`
+-- Constraints for table `Veiculo`
 --
 ALTER TABLE `Veiculo`
   ADD CONSTRAINT `fk_Veiculo_Categoria` FOREIGN KEY (`idCategoria`) REFERENCES `Categoria` (`idCategoria`);

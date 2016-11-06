@@ -36,20 +36,20 @@ public class LoginBean {
             List<Funcionario> funcionarios = manager.createQuery("from Funcionario", Funcionario.class).getResultList();
             for(Funcionario f : funcionarios){
                 if(f.getUsuario().equals(usuario) && f.getSenha().equals(senha)){
-                    System.out.println("Seja Bem vindo!!");
                     try {
+                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.FACES_MESSAGES, "Seja bem vindo!."));
                         FacesContext.getCurrentInstance().getExternalContext().redirect("/Home.xhtml");
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }else {
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!", "Usuario ou senha invalidos."));
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Usuario ou senha invalidos."));
                     System.out.println("Dados Invalidos!!");
                 }
                 JpaUtil.closeManager(manager);
             }
         }catch (Exception ex){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro no sistema!", ex.getMessage()));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro", "Falha ao buscar dados!"));
         }
     }
     

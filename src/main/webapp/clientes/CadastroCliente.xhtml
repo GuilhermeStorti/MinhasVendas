@@ -9,11 +9,10 @@
 	<ui:define name="tituloConteudo"><h1>Novo cliente</h1></ui:define>
 	
 	<ui:define name="corpo">
-		
 		<p:toolbar>
 			<p:toolbarGroup>
 				<p:button value="Novo" outcome="/clientes/CadastroCliente"/>
-				<p:commandButton style="margin-left:5px;" value="Salvar" action="#{cadastroClienteBean.salvar}" update="form"/>
+				<p:commandButton style="margin-left:5px;" value="Salvar" action="#{cadastroClienteBean.salvar}" update="form" oncomplete="teste.show()"/>
 			</p:toolbarGroup>
 			<p:toolbarGroup align="right">
 				<p:button value="Pesquisar" outcome="/clientes/GerenciarClientes" update="form"/>
@@ -33,8 +32,26 @@
 
 				<p:outputLabel value="CNH" for="cnh"/>
 				<p:inputMask mask="" id="cnh" size="14" value="#{cadastroClienteBean.cliente.cnh}"/>
+
+				<p:commandButton style="margin-left:5px;" value="Salvar" action="#{cadastroClienteBean.salvar}" update="form" oncomplete="teste.show()"/>
+
+				<p:confirmDialog widgetVar="teste" message="Aqui sa porra!" header="Agora Sim">
+					<p:commandButton value="Sim"/>
+					<p:commandButton value="Não"/>
+				</p:confirmDialog>
+
+<!--				<p:commandButton value="Aqui" title="Excluir" oncomplete="PF('exclusaoPaciente').show()"
+								 process="@this" update=":form:exclusaoPacienteDialog">
+				</p:commandButton>
+				<p:confirmDialog header="Exclusao de Pacientes" id="exclusaoPacienteDialog"
+								 message="Tem certeza que deseja excluir este paciente: ?"
+								 widgetVar="exclusaoPaciente">
+					<p:commandButton value="Sim" process="@this" update="form:tabelaPacientes"/>
+					<p:button value="Não" onclick="PF('exclusaoPaciente').hide(); return false;"/>
+				</p:confirmDialog>-->
 			</p:panelGrid>
 		</h:form>
+
 	</ui:define>
 	
 </ui:composition>
