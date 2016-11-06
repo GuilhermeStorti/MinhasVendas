@@ -7,8 +7,10 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title><ui:insert name="titulo">Minhas Vendas</ui:insert></title>
-	<script src="#{request.contextPath}/resources/jquery/jquery-3.1.0.min.js"></script>
-	<script src="#{request.contextPath}/resources/jquery/jquery.maskMoney.min.js"></script>
+	<script
+			src="#{request.contextPath}/resources/jquery/jquery-3.1.0.min.js"></script>
+	<script
+			src="#{request.contextPath}/resources/jquery/jquery.maskMoney.min.js"></script>
 	<link rel="stylesheet" type="text/css"
 		  href="#{request.contextPath}/resources/bootstrap/css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css"
@@ -16,13 +18,13 @@
 	<link rel="stylesheet" type="text/css"
 		  href="#{request.contextPath}/resources/dist/css/skins/skin-blue.min.css" />
 	<link rel="stylesheet"
-		  href="#{request.contextPath}/resources/font-awesome.min.css" />
+		  href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
 	<link rel="stylesheet"
 		  href="#{request.contextPath}/resources/ionicons.min.css" />
 	<link rel="stylesheet"
 		  href="#{request.contextPath}/resources/sistema.css" />
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700'
-			rel='stylesheet' type='text/css' />
+		  rel='stylesheet' type='text/css' />
 </h:head>
 
 <h:body>
@@ -42,8 +44,8 @@
 					<p:password value="#{loginBean.senha}" id="senha" size="30" maxlength="6" style="margin-bottom: 5px; margin-left: 5px;" tabindex="2"/>
 				<p:column/>
 				<p:column>
-					<p:commandButton value="Limpar" action="#{loginBean.limpar()}" update="frm" tabindex="3"/>
-					<p:commandButton value="Entrar" style="margin-left: 46px;" action="#{loginBean.entrar()}" ajax="false" tabindex="4"/>
+					<p:commandButton value="Limpar" action="#{loginBean.limpar()}" update="frm" tabindex="3" icon="fa fa-fw fa-eraser"/>
+					<p:commandButton value="Entrar" style="margin-left: 46px;" action="#{loginBean.entrar()}" ajax="false" tabindex="4" icon="fa fa-fw fa-sign-in"/>
 				</p:column>
 			</h:panelGrid>
 		</h:form>

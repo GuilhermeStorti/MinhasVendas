@@ -20,9 +20,12 @@ public class GerenciarClientesBean {
 
     private List<Cliente> clientes;
     private Cliente cliente;
+    private char tipoBusca;
 
     public GerenciarClientesBean() {
-        clientes = new ArrayList<>();
+        this.clientes = new ArrayList<>();
+        this.cliente = new Cliente();
+        this.tipoBusca = 'A';
     }
 
     @PostConstruct
@@ -32,7 +35,6 @@ public class GerenciarClientesBean {
 
     public void editar(Cliente cliente){
         this.cliente = cliente;
-        System.out.println(this.cliente);
     }
 
     public void excluir(Cliente cliente){
@@ -53,7 +55,6 @@ public class GerenciarClientesBean {
         manager.merge(cliente);
         manager.getTransaction().commit();
         JpaUtil.closeManager(manager);
-        carregarLista();
     }
 
     public void ativar(Cliente cliente){
@@ -66,21 +67,44 @@ public class GerenciarClientesBean {
         carregarLista();
     }
 
-    private void carregarLista(){
-        EntityManager manager = JpaUtil.getManager();
-        clientes = manager.createQuery("from Cliente", Cliente.class).getResultList();
-/*        clientes = manager.createNamedQuery("Cliente.findBySituacao", Cliente.class)
-                .setParameter("situacao", 'A')
-                .getResultList();*/
-        JpaUtil.closeManager(manager);
+    public void carregarLista(){
+        if(this.tipoBusca == 'A'){
+            EntityManager manager = JpaUtil.getManager();
+            clientes = manager.createNamedQuery("Cliente.findBySituacao", Cliente.class)
+                    .setParameter("situacao", 'A')
+                    .getResultList();
+            JpaUtil.closeManager(manager);
+        }else if(this.tipoBusca == 'I'){
+            EntityManager manager = JpaUtil.getManager();
+            clientes = manager.createNamedQuery("Cliente.findBySituacao", Cliente.class)
+                    .setParameter("situacao", 'I')
+                    .getResultList();
+            JpaUtil.closeManager(manager);
+        }else{
+            EntityManager manager = JpaUtil.getManager();
+            clientes = manager.createQuery("from Cliente", Cliente.class).getResultList();
+            JpaUtil.closeManager(manager);
+        }
+    }
+
+    public char getTipoBusca() {
+        return tipoBusca;
+    }
+
+    public void setTipoBusca(char tipoBusca) {
+        this.tipoBusca = tipoBusca;
     }
 
     public boolean validar(Cliente cliente){
         return cliente.getSituacao() == 'A' ? true : false;
     }
 
-    public String validarCss(Cliente cliente){
-        return cliente.getSituacao() == 'A' ? "situacao" : "";
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public List<Cliente> getClientes() {

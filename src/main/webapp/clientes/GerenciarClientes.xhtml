@@ -12,9 +12,26 @@
 		
 		<p:toolbar>
 			<p:toolbarGroup align="right">
-				<p:button value="Novo" outcome="/clientes/CadastroCliente"/>
+				<p:button value="Novo" icon="fa fa-fw fa-plus"  outcome="/clientes/CadastroCliente"/>
 			</p:toolbarGroup>
 		</p:toolbar>
+
+		<h:form id="formBusca" style="margin-top: 10px;">
+			<!--<p:selectOneMenu id="listar" value="#{gerenciarClientesBean.tipoBusca}" style="width:125px">
+				<f:selectItem itemLabel="Todos" itemValue="T" />
+				<f:selectItem itemLabel="Ativo" itemValue="A"/>
+				<f:selectItem itemLabel="Inativo" itemValue="I"/>
+			</p:selectOneMenu>-->
+			<p:panelGrid columns="3">
+				<p:outputLabel value="Filtrar por:" for="listar"/>
+				<p:selectOneListbox id="listar" value="#{gerenciarClientesBean.tipoBusca}">
+					<f:selectItem itemLabel="Todos" itemValue="T" />
+					<f:selectItem itemLabel="Ativo" itemValue="A"/>
+					<f:selectItem itemLabel="Inativo" itemValue="I"/>
+				</p:selectOneListbox>
+				<p:commandButton value="Listar" icon="fa fa-fw fa-search" action="#{gerenciarClientesBean.carregarLista}" ajax="false" update="frm"/>
+			</p:panelGrid>
+		</h:form>
 		
 		<h:form id="frm" style="margin-top: 10px;">
 
@@ -42,15 +59,48 @@
 					<h:outputText value="#{cliente.situacao}" />
 				</p:column>
 				<p:column width="5%" styleClass="center" >
-					<p:commandLink action="#{gerenciarClientesBean.editar(cliente)}" styleClass="fa fa-pencil" title="Editar" ajax="false"/>
+					<p:commandLink action="#{gerenciarClientesBean.editar(cliente)}" styleClass="fa fa-pencil" title="Editar" ajax="false" onclick="PF('cd').show()"/>
 					<p:spacer width="15px;"/>
 					<p:commandLink styleClass="fa fa-thumbs-o-down" title="Inativar" action="#{gerenciarClientesBean.inativar(cliente)}"
 								   ajax="false" rendered="#{gerenciarClientesBean.validar(cliente)}"/>
 					<p:commandLink styleClass="fa fa-thumbs-o-up" title="Ativar" action="#{gerenciarClientesBean.ativar(cliente)}"
 								   ajax="false"  rendered="#{!gerenciarClientesBean.validar(cliente)}"/>
 				</p:column>
-
 			</p:dataTable>
+
+			<p:confirmDialog message="Editar Cliente" header="Editar" severity="alert" widgetVar="cd"
+							 style="margin-top: 10%; margin-left: 45%">
+				<p:panelGrid columns="2">
+					<p:outputLabel value="Id" for="id"/>
+					<p:inputText value="#{gerenciarClientesBean.cliente.idCliente}" id="id" disabled="true"/>
+
+					<p:outputLabel value="Nome" for="nome"/>
+					<p:inputText value="#{gerenciarClientesBean.cliente.nome}" id="nome" />
+
+					<p:outputLabel value="Telefone" for="telefone"/>
+					<p:inputText value="#{gerenciarClientesBean.cliente.telefone}" id="telefone" />
+
+					<p:outputLabel value="CPF" for="cpf"/>
+					<p:inputText value="#{gerenciarClientesBean.cliente.cpf}" id="cpf" />
+
+					<p:outputLabel value="CNH" for="cnh"/>
+					<p:inputText value="#{gerenciarClientesBean.cliente.cnh}" id="cnh" />
+
+					<p:outputLabel value="Situação" for="situacao"/>
+					<p:selectOneMenu id="situacao" value="#{gerenciarClientesBean.cliente.situacao}" style="width:125px">
+						<f:selectItem itemLabel="Ativo" itemValue="A" />
+						<f:selectItem itemLabel="Inativo" itemValue="I" />
+					</p:selectOneMenu>
+
+					<p:column/>
+
+					<p:column>
+						<p:commandButton value="Salvar" onclick="PF('cd').close()" icon="fa fa-fw fa-save"/>
+						<p:commandButton value="Voltar" onclick="PF('cd').close()" icon="fa fa-fw fa-mail-reply"/>
+					</p:column>
+				</p:panelGrid>
+			</p:confirmDialog>
+
 		</h:form>
 	</ui:define>
 	

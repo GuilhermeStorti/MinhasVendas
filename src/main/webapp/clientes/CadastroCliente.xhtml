@@ -9,15 +9,17 @@
 	<ui:define name="tituloConteudo"><h1>Novo cliente</h1></ui:define>
 	
 	<ui:define name="corpo">
-		<p:toolbar>
-			<p:toolbarGroup>
-				<p:button value="Novo" outcome="/clientes/CadastroCliente"/>
-				<p:commandButton style="margin-left:5px;" value="Salvar" action="#{cadastroClienteBean.salvar}" update="form" oncomplete="teste.show()"/>
-			</p:toolbarGroup>
-			<p:toolbarGroup align="right">
-				<p:button value="Pesquisar" outcome="/clientes/GerenciarClientes" update="form"/>
-			</p:toolbarGroup>
-		</p:toolbar>
+		<h:form>
+			<p:toolbar>
+				<p:toolbarGroup>
+					<p:button value="Novo" icon="fa fa-fw fa-plus"  outcome="/clientes/CadastroCliente"/>
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisar" icon="fa fa-fw fa-search"  outcome="/clientes/GerenciarClientes" update="form"/>
+				</p:toolbarGroup>
+			</p:toolbar>
+
+		</h:form>
 
 		<h:form id="form">
 			<p:panelGrid columns="2" id="painel" style="margin-top: 20px; width:100%;" columnClasses="rotulo, campo">
@@ -33,23 +35,32 @@
 				<p:outputLabel value="CNH" for="cnh"/>
 				<p:inputMask mask="" id="cnh" size="14" value="#{cadastroClienteBean.cliente.cnh}"/>
 
-				<p:commandButton style="margin-left:5px;" value="Salvar" action="#{cadastroClienteBean.salvar}" update="form" oncomplete="teste.show()"/>
+				<p:outputLabel value="Situação" for="situacao"/>
+				<p:selectOneListbox id="situacao" value="#{cadastroClienteBean.cliente.situacao}" style="width:125px">
+					<f:selectItem itemLabel="Ativo" itemValue="A"/>
+					<f:selectItem itemLabel="Inativo" itemValue="I"/>
+				</p:selectOneListbox>
 
-				<p:confirmDialog widgetVar="teste" message="Aqui sa porra!" header="Agora Sim">
-					<p:commandButton value="Sim"/>
-					<p:commandButton value="Não"/>
-				</p:confirmDialog>
+				<p:column/>
+				<p:column>
+					<p:commandButton value="Limpar" action="#{cadastroClienteBean.salvar}" icon="fa fa-fw fa-eraser" update="form"/>
+					<p:commandButton value="Salvar" style="margin-left: 5px;" icon="fa fa-fw fa-save" onsuccess="PF('cd').show()"/>
+				</p:column>
 
-<!--				<p:commandButton value="Aqui" title="Excluir" oncomplete="PF('exclusaoPaciente').show()"
-								 process="@this" update=":form:exclusaoPacienteDialog">
-				</p:commandButton>
-				<p:confirmDialog header="Exclusao de Pacientes" id="exclusaoPacienteDialog"
-								 message="Tem certeza que deseja excluir este paciente: ?"
-								 widgetVar="exclusaoPaciente">
-					<p:commandButton value="Sim" process="@this" update="form:tabelaPacientes"/>
-					<p:button value="Não" onclick="PF('exclusaoPaciente').hide(); return false;"/>
-				</p:confirmDialog>-->
 			</p:panelGrid>
+
+			<p:confirmDialog message="Confirmar cadastro" header="Cadastrar" severity="alert" widgetVar="cd"
+							 style="margin-top: 10%; margin-left: 45%">
+				<p:panelGrid columns="2">
+					<p:commandButton value="Salvar" action="#{cadastroClienteBean.salvar()}" onclick="PF('cd').close()"/>
+					<p:commandButton value="Cancelar" onclick="PF('cd').close()"/>
+				</p:panelGrid>
+			</p:confirmDialog>
+
+		</h:form>
+
+		<h:form>
+
 		</h:form>
 
 	</ui:define>
