@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Categoria.findAll", query = "SELECT c FROM Categoria c")
     , @NamedQuery(name = "Categoria.findByIdCategoria", query = "SELECT c FROM Categoria c WHERE c.idCategoria = :idCategoria")
+    , @NamedQuery(name = "Categoria.findByIdDescricao", query = "SELECT c FROM Categoria c WHERE c.descricao = :descricao")
     , @NamedQuery(name = "Categoria.findByPreco", query = "SELECT c FROM Categoria c WHERE c.preco = :preco")})
 public class Categoria implements Serializable {
 
@@ -44,6 +45,8 @@ public class Categoria implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "preco")
     private BigDecimal preco;
+    @Column(name = "descricao")
+    private String descricao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCategoria")
     private List<Veiculo> veiculoList;
 
@@ -77,6 +80,14 @@ public class Categoria implements Serializable {
 
     public void setVeiculoList(List<Veiculo> veiculoList) {
         this.veiculoList = veiculoList;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     @Override

@@ -6,7 +6,6 @@ import com.curso.utils.JpaUtil;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +20,7 @@ public class GerenciarClientesBean {
     private List<Cliente> clientes;
     private Cliente cliente;
     private char tipoBusca;
+    private boolean exibir = false;
 
     public GerenciarClientesBean() {
         this.clientes = new ArrayList<>();
@@ -33,8 +33,29 @@ public class GerenciarClientesBean {
         carregarLista();
     }
 
+    public void esconder(){
+        this.exibir = false;
+    }
+
     public void editar(Cliente cliente){
         this.cliente = cliente;
+        this.exibir = true;
+    }
+
+    public void voltar(){
+        this.exibir = false;
+    }
+
+    public void salvarEdicao(){
+        EntityManager manager = JpaUtil.getManager();
+        manager.getTransaction().begin();
+        Cliente antigo = manager.find(Cliente.class, cliente.getIdCliente());
+        antigo = cliente;
+        manager.merge(antigo);
+        manager.getTransaction().commit();
+        JpaUtil.closeManager(manager);
+        carregarLista();
+        this.exibir = false;
     }
 
     public void excluir(Cliente cliente){
@@ -85,6 +106,14 @@ public class GerenciarClientesBean {
             clientes = manager.createQuery("from Cliente", Cliente.class).getResultList();
             JpaUtil.closeManager(manager);
         }
+    }
+
+    public boolean isExibir() {
+        return exibir;
+    }
+
+    public void setExibir(boolean exibir) {
+        this.exibir = exibir;
     }
 
     public char getTipoBusca() {
