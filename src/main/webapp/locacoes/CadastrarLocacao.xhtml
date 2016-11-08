@@ -10,9 +10,40 @@
     <ui:define name="titulo">Cadastrar Locação</ui:define>
 
     <ui:define name="corpo">
-
-        CORPOOOOO
-        <!--Trabalhe aqui!!-->
+        
+        <p:toolbar>
+            <p:toolbarGroup>
+                <p:button value="Novo" outcome="/locacoes/CadastrarLocacao"/>
+                <p:commandButton style="margin-left:5px;" value="Salvar" action="#{cadastrarLocacaoBean.salvar()}" update="form" />
+            </p:toolbarGroup>
+        </p:toolbar>
+        
+        <h:form id="form">
+            <p:panelGrid columns="2" id="painel" style="margin-top: 20px; width:100%;" columnClasses="rotulo, campo">
+                
+                <p:outputLabel value="IdCliente:" for="idCliente" />
+                <h:selectOneMenu id="idCliente" value="#{cadastrarLocacaoBean.locacao.idCliente}" title="IdCliente" requiredMessage="O campo IdCliente é obrigatório.">
+                    <f:selectItems value="#{fixme}"/>
+                </h:selectOneMenu>
+                <p:outputLabel value="IdFuncionario Cad.:" for="idFuncionariocad" />
+                <h:selectOneMenu id="idFuncionariocad" value="#{cadastrarLocacaoBean.locacao.idFuncionariocad}" title="IdFuncionariocad" required="true" requiredMessage="O campo IdFuncionario Cad é necessário.">
+                    <f:selectItem value="#{fixme}"/>
+                </h:selectOneMenu>
+                 <p:outputLabel value="IdFuncionario Recebimento:" for="idFuncionariorec" />
+                <h:selectOneMenu id="idFuncionariorec" value="#{cadastrarLocacaoBean.locacao.idFuncionariorec}" title="IdFuncionariorec">
+                    <f:selectItem value="#{fixme}"/>
+                </h:selectOneMenu>  
+                <p:outputLabel value="IdVeiculo:" for="idVeiculo" />
+                <h:selectOneMenu id="idVeiculo" value="#{cadastrarLocacaoBean.locacao.idVeiculo}" title="IdVeiculo" required="true" requiredMessage="O campo IdVeiculo é obrigatório.">
+                    <f:selectItem value="#{fixme}"/>
+                </h:selectOneMenu> 
+                <p:outputLabel value="Data_inicio:" for="data_inicio" />  
+                <p:inputText id="data_inicio" value="#{cadastrarLocacaoBean.locacao.data_inicio}" title="Data_inicio" />                              
+                <p:outputLabel value="Data Entrega:" for="data_fim" />     
+                <p:inputText id="data_fim" value="#{cadastrarLocacaoBean.locacao.data_fim}" title="Data_fim" />
+                
+            </p:panelGrid>
+        </h:form>
 
     </ui:define>
 
