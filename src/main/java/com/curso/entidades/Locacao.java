@@ -6,6 +6,7 @@
 package com.curso.entidades;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -32,7 +33,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Locacao.findAll", query = "SELECT l FROM Locacao l")
-    , @NamedQuery(name = "Locacao.findByIdLocacao", query = "SELECT l FROM Locacao l WHERE l.idLocacao = :idLocacao")})
+    , @NamedQuery(name = "Locacao.findByIdLocacao", query = "SELECT l FROM Locacao l WHERE l.idLocacao = :idLocacao")
+    , @NamedQuery(name = "Locacao.findByData_inicio", query = "SELECT l FROM Locacao l WHERE l.data_inicio = :data_inicio")
+    , @NamedQuery(name = "Locacao.findByData_fim", query = "SELECT l FROM Locacao l WHERE l.data_fim = :data_fim")})
 public class Locacao implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -60,6 +63,10 @@ public class Locacao implements Serializable {
     @JoinColumn(name = "idVeiculo", referencedColumnName = "idVeiculo")
     @ManyToOne(optional = false)
     private Veiculo idVeiculo;
+    @Column(name = "data_inicio")
+    private Date data_inicio;
+    @Column(name = "data_fim")
+    private Date data_fim;
 
     public Locacao() {
     }
@@ -124,6 +131,22 @@ public class Locacao implements Serializable {
 
     public void setIdVeiculo(Veiculo idVeiculo) {
         this.idVeiculo = idVeiculo;
+    }
+
+    public Date getData_inicio() {
+        return data_inicio;
+    }
+
+    public void setData_inicio(Date data_inicio) {
+        this.data_inicio = data_inicio;
+    }
+
+    public Date getData_fim() {
+        return data_fim;
+    }
+
+    public void setData_fim(Date data_fim) {
+        this.data_fim = data_fim;
     }
 
     @Override
