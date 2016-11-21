@@ -1,6 +1,7 @@
 package com.curso.entidades;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -29,6 +30,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Funcionario.findByMatricula", query = "SELECT f FROM Funcionario f WHERE f.matricula = :matricula")
     , @NamedQuery(name = "Funcionario.findByNome", query = "SELECT f FROM Funcionario f WHERE f.nome = :nome")
     , @NamedQuery(name = "Funcionario.findByUsuario", query = "SELECT f FROM Funcionario f WHERE f.usuario = :usuario")
+    , @NamedQuery(name = "Funcionario.findByCpf", query = "SELECT f FROM Funcionario f WHERE f.cpf = :cpf")
+    , @NamedQuery(name = "Funcionario.findByDataNascimento", query = "SELECT f FROM Funcionario f WHERE f.dataNascimento = :dataNascimento")
     , @NamedQuery(name = "Funcionario.findBySenha", query = "SELECT f FROM Funcionario f WHERE f.senha = :senha")})
 public class Funcionario implements Serializable {
 
@@ -50,6 +53,10 @@ public class Funcionario implements Serializable {
     @Basic(optional = false)
     @Column(name = "senha")
     private String senha;
+    @Column(name = "cpf")
+    private String cpf;
+    @Column(name = "data_nascimento")
+    private Date dataNascimento;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idFuncionariocad")
     private List<Locacao> locacaoList;
     @OneToMany(mappedBy = "idFuncionariorec")
@@ -62,12 +69,29 @@ public class Funcionario implements Serializable {
         this.idfuncionario = idfuncionario;
     }
 
-    public Funcionario(Integer idfuncionario, String matricula, String nome, String usuario, String senha) {
-        this.idfuncionario = idfuncionario;
+    public Funcionario(String matricula, String nome, String usuario, String senha, String cpf, Date dataNascimento) {
         this.matricula = matricula;
         this.nome = nome;
         this.usuario = usuario;
         this.senha = senha;
+        this.cpf = cpf;
+        this.dataNascimento = dataNascimento;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public Integer getIdfuncionario() {
