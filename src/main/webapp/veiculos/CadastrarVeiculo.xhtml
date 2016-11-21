@@ -7,12 +7,16 @@
 
     <ui:define name="titulo">Cadastrar Veículo</ui:define>
 
-    <ui:define name="titulo">Cadastrar Veículo</ui:define>
+    <ui:define name="tituloConteudo"><h1>Cadastrar Veículo</h1></ui:define>
 
     <ui:define name="corpo">
 
-        CORPOOOOO
-        <!--Trabalhe aqui!!-->
+        <h:form id="formCad">
+            <p:panelGrid columns="2">
+                <p:outputLabel value="Nome" for="nome"/>
+                <p:inputText value="#{cadastrarVeiculoBean.veiculo.}"
+            </p:panelGrid>
+        </h:form>
 
     </ui:define>
 
