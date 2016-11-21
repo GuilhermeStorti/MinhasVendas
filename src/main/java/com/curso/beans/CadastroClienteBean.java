@@ -1,15 +1,17 @@
 package com.curso.beans;
 
+import com.curso.entidades.Autenticador;
 import com.curso.entidades.Cliente;
 import com.curso.utils.JpaUtil;
-import org.primefaces.context.RequestContext;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
+import java.io.IOException;
+import java.util.Map;
 
 /**
  * Created by guilherme on 12/10/16.
@@ -18,7 +20,18 @@ import javax.persistence.EntityManager;
 @ViewScoped
 public class CadastroClienteBean {
 
+    private Autenticador autenticador;
+
+    public void validarSecao(){
+        Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        String urlID = params.get("autenticador");
+        if (urlID == null){
+            this.autenticador = (Autenticador) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("autenticador");
+        }
+    }
+
     public CadastroClienteBean() {
+        validarSecao();
         this.cliente = new Cliente();
         cliente.setSituacao('A');
     }

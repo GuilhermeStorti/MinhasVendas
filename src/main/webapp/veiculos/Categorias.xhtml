@@ -3,15 +3,16 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:p="http://primefaces.org/ui">
+                xmlns:p="http://primefaces.org/ui" xmlns:P="http://java.sun.com/jsf/html">
 
     <ui:define name="titulo">Categorias</ui:define>
 
-    <ui:define name="titulo">Categorias</ui:define>
+    <ui:define name="tituloConteudo"><h1>Categorias</h1></ui:define>
 
     <ui:define name="corpo">
 
         <h:form id="formTable">
+            <p:outputLabel value="Inserir nova:" />
             <p:panelGrid columns="2">
                 <p:outputLabel value="Descricao" />
                 <p:inputText value="#{categoriasBean.categoria.descricao}" />
