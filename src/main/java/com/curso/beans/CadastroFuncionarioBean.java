@@ -25,7 +25,7 @@ public class CadastroFuncionarioBean {
 
     public CadastroFuncionarioBean() {
           this.funcionario = new Funcionario();
-        funcionario.setSituacao('A');
+        //funcionario.setSituacao('A');
     }
     
     private Funcionario funcionario;

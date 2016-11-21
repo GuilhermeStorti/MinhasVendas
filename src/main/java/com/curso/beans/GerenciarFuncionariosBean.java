@@ -94,9 +94,9 @@ public class GerenciarFuncionariosBean {
         this.tipoBusca = tipoBusca;
     }
      
-      public boolean validar(Funcionario funcionario){
-        return Funcionario.getSituacao() == 'A' ? true : false;
-    }
+/*      public boolean validar(Funcionario funcionario){
+        //return Funcionario.getSituacao() == 'A' ? true : false;
+    }*/
       
     public Funcionario getCFuncionario() {
         return funcionario;
