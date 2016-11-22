@@ -21,6 +21,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -34,8 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Locacao.findAll", query = "SELECT l FROM Locacao l")
     , @NamedQuery(name = "Locacao.findByIdLocacao", query = "SELECT l FROM Locacao l WHERE l.idLocacao = :idLocacao")
-    , @NamedQuery(name = "Locacao.findByData_inicio", query = "SELECT l FROM Locacao l WHERE l.data_inicio = :data_inicio")
-    , @NamedQuery(name = "Locacao.findByData_fim", query = "SELECT l FROM Locacao l WHERE l.data_fim = :data_fim")})
+    , @NamedQuery(name = "Locacao.findByDataLocacao", query = "SELECT l FROM Locacao l WHERE l.dataLocacao = :dataLocacao")})
 public class Locacao implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,6 +45,9 @@ public class Locacao implements Serializable {
     @Basic(optional = false)
     @Column(name = "idLocacao")
     private Integer idLocacao;
+    @Column(name = "data_locacao")
+    @Temporal(TemporalType.DATE)
+    private Date dataLocacao;
     @ManyToMany(mappedBy = "locacaoList")
     private List<Avaria> avariaList;
     @JoinTable(name = "Locacao_Multa", joinColumns = {
@@ -63,10 +67,6 @@ public class Locacao implements Serializable {
     @JoinColumn(name = "idVeiculo", referencedColumnName = "idVeiculo")
     @ManyToOne(optional = false)
     private Veiculo idVeiculo;
-    @Column(name = "data_inicio")
-    private Date data_inicio;
-    @Column(name = "data_fim")
-    private Date data_fim;
 
     public Locacao() {
     }
@@ -81,6 +81,14 @@ public class Locacao implements Serializable {
 
     public void setIdLocacao(Integer idLocacao) {
         this.idLocacao = idLocacao;
+    }
+
+    public Date getDataLocacao() {
+        return dataLocacao;
+    }
+
+    public void setDataLocacao(Date dataLocacao) {
+        this.dataLocacao = dataLocacao;
     }
 
     @XmlTransient
@@ -131,22 +139,6 @@ public class Locacao implements Serializable {
 
     public void setIdVeiculo(Veiculo idVeiculo) {
         this.idVeiculo = idVeiculo;
-    }
-
-    public Date getData_inicio() {
-        return data_inicio;
-    }
-
-    public void setData_inicio(Date data_inicio) {
-        this.data_inicio = data_inicio;
-    }
-
-    public Date getData_fim() {
-        return data_fim;
-    }
-
-    public void setData_fim(Date data_fim) {
-        this.data_fim = data_fim;
     }
 
     @Override

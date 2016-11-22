@@ -32,8 +32,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Categoria.findAll", query = "SELECT c FROM Categoria c")
     , @NamedQuery(name = "Categoria.findByIdCategoria", query = "SELECT c FROM Categoria c WHERE c.idCategoria = :idCategoria")
-    , @NamedQuery(name = "Categoria.findByIdDescricao", query = "SELECT c FROM Categoria c WHERE c.descricao = :descricao")
-    , @NamedQuery(name = "Categoria.findByPreco", query = "SELECT c FROM Categoria c WHERE c.preco = :preco")})
+    , @NamedQuery(name = "Categoria.findByPreco", query = "SELECT c FROM Categoria c WHERE c.preco = :preco")
+    , @NamedQuery(name = "Categoria.findByDescricao", query = "SELECT c FROM Categoria c WHERE c.descricao = :descricao")})
 public class Categoria implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,6 +45,7 @@ public class Categoria implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "preco")
     private BigDecimal preco;
+    @Basic(optional = false)
     @Column(name = "descricao")
     private String descricao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCategoria")
@@ -55,6 +56,11 @@ public class Categoria implements Serializable {
 
     public Categoria(Integer idCategoria) {
         this.idCategoria = idCategoria;
+    }
+
+    public Categoria(Integer idCategoria, String descricao) {
+        this.idCategoria = idCategoria;
+        this.descricao = descricao;
     }
 
     public Integer getIdCategoria() {
@@ -73,6 +79,14 @@ public class Categoria implements Serializable {
         this.preco = preco;
     }
 
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
     @XmlTransient
     public List<Veiculo> getVeiculoList() {
         return veiculoList;
@@ -80,14 +94,6 @@ public class Categoria implements Serializable {
 
     public void setVeiculoList(List<Veiculo> veiculoList) {
         this.veiculoList = veiculoList;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
     }
 
     @Override

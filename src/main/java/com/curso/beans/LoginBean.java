@@ -14,7 +14,6 @@ import javax.persistence.EntityManager;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  *
@@ -43,7 +42,7 @@ public class LoginBean {
     public void entrar(){
         try {
             EntityManager manager = JpaUtil.getManager();
-            List<Funcionario> funcionarios = manager.createQuery("from Funcionario", Funcionario.class).getResultList();
+            List<Funcionario> funcionarios = manager.createNamedQuery("Funcionario.findAll").getResultList();
             for(Funcionario f : funcionarios){
                 if(f.getUsuario().equals(usuario) && f.getSenha().equals(senha)){
                     try {

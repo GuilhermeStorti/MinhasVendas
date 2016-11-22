@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.curso.entidades;
 
 import java.io.Serializable;
@@ -14,6 +19,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -30,9 +37,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Funcionario.findByMatricula", query = "SELECT f FROM Funcionario f WHERE f.matricula = :matricula")
     , @NamedQuery(name = "Funcionario.findByNome", query = "SELECT f FROM Funcionario f WHERE f.nome = :nome")
     , @NamedQuery(name = "Funcionario.findByUsuario", query = "SELECT f FROM Funcionario f WHERE f.usuario = :usuario")
+    , @NamedQuery(name = "Funcionario.findBySenha", query = "SELECT f FROM Funcionario f WHERE f.senha = :senha")
     , @NamedQuery(name = "Funcionario.findByCpf", query = "SELECT f FROM Funcionario f WHERE f.cpf = :cpf")
-    , @NamedQuery(name = "Funcionario.findByDataNascimento", query = "SELECT f FROM Funcionario f WHERE f.dataNascimento = :dataNascimento")
-    , @NamedQuery(name = "Funcionario.findBySenha", query = "SELECT f FROM Funcionario f WHERE f.senha = :senha")})
+    , @NamedQuery(name = "Funcionario.findByDataNascimento", query = "SELECT f FROM Funcionario f WHERE f.dataNascimento = :dataNascimento")})
 public class Funcionario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,9 +60,12 @@ public class Funcionario implements Serializable {
     @Basic(optional = false)
     @Column(name = "senha")
     private String senha;
+    @Basic(optional = false)
     @Column(name = "cpf")
-    private String cpf;
+    private int cpf;
+    @Basic(optional = false)
     @Column(name = "data_nascimento")
+    @Temporal(TemporalType.DATE)
     private Date dataNascimento;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idFuncionariocad")
     private List<Locacao> locacaoList;
@@ -69,28 +79,13 @@ public class Funcionario implements Serializable {
         this.idfuncionario = idfuncionario;
     }
 
-    public Funcionario(String matricula, String nome, String usuario, String senha, String cpf, Date dataNascimento) {
+    public Funcionario(Integer idfuncionario, String matricula, String nome, String usuario, String senha, int cpf, Date dataNascimento) {
+        this.idfuncionario = idfuncionario;
         this.matricula = matricula;
         this.nome = nome;
         this.usuario = usuario;
         this.senha = senha;
         this.cpf = cpf;
-        this.dataNascimento = dataNascimento;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public Date getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
@@ -132,6 +127,22 @@ public class Funcionario implements Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public int getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(int cpf) {
+        this.cpf = cpf;
+    }
+
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     @XmlTransient

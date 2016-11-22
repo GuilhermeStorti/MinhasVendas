@@ -6,7 +6,9 @@
 package com.curso.entidades;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,8 +16,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -49,8 +53,11 @@ public class Cliente implements Serializable {
     private String cpf;
     @Column(name = "cnh")
     private String cnh;
+    @Basic(optional = false)
     @Column(name = "situacao")
-    private char situacao;
+    private Character situacao;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCliente")
+    private List<Locacao> locacaoList;
 
     public Cliente() {
     }
@@ -59,9 +66,10 @@ public class Cliente implements Serializable {
         this.idCliente = idCliente;
     }
 
-    public Cliente(Integer idCliente, String nome) {
+    public Cliente(Integer idCliente, String nome, Character situacao) {
         this.idCliente = idCliente;
         this.nome = nome;
+        this.situacao = situacao;
     }
 
     public Integer getIdCliente() {
@@ -104,12 +112,21 @@ public class Cliente implements Serializable {
         this.cnh = cnh;
     }
 
-    public char getSituacao() {
+    public Character getSituacao() {
         return situacao;
     }
 
-    public void setSituacao(char situacao) {
+    public void setSituacao(Character situacao) {
         this.situacao = situacao;
+    }
+
+    @XmlTransient
+    public List<Locacao> getLocacaoList() {
+        return locacaoList;
+    }
+
+    public void setLocacaoList(List<Locacao> locacaoList) {
+        this.locacaoList = locacaoList;
     }
 
     @Override

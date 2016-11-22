@@ -33,9 +33,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Veiculo.findAll", query = "SELECT v FROM Veiculo v")
     , @NamedQuery(name = "Veiculo.findByIdVeiculo", query = "SELECT v FROM Veiculo v WHERE v.idVeiculo = :idVeiculo")
+    , @NamedQuery(name = "Veiculo.findByMarca", query = "SELECT v FROM Veiculo v WHERE v.marca = :marca")
     , @NamedQuery(name = "Veiculo.findByPlaca", query = "SELECT v FROM Veiculo v WHERE v.placa = :placa")
-    , @NamedQuery(name = "Veiculo.findByModelo", query = "SELECT v FROM Veiculo v WHERE v.modelo = :modelo")
-    , @NamedQuery(name = "Veiculo.findByMarca", query = "SELECT v FROM Veiculo v WHERE v.marca = :marca")})
+    , @NamedQuery(name = "Veiculo.findByModelo", query = "SELECT v FROM Veiculo v WHERE v.modelo = :modelo")})
 public class Veiculo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,15 +47,17 @@ public class Veiculo implements Serializable {
     @Basic(optional = false)
     @Column(name = "marca")
     private String marca;
+    @Basic(optional = false)
+    @Column(name = "placa")
+    private String placa;
+    @Basic(optional = false)
+    @Column(name = "modelo")
+    private String modelo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idVeiculo")
     private List<Locacao> locacaoList;
     @JoinColumn(name = "idCategoria", referencedColumnName = "idCategoria")
     @ManyToOne(optional = false)
     private Categoria idCategoria;
-    @Column(name = "placa")
-    private String placa;
-    @Column(name = "modelo")
-    private String modelo;
 
     public Veiculo() {
     }
@@ -64,9 +66,11 @@ public class Veiculo implements Serializable {
         this.idVeiculo = idVeiculo;
     }
 
-    public Veiculo(Integer idVeiculo, String marca) {
+    public Veiculo(Integer idVeiculo, String marca, String placa, String modelo) {
         this.idVeiculo = idVeiculo;
         this.marca = marca;
+        this.placa = placa;
+        this.modelo = modelo;
     }
 
     public Integer getIdVeiculo() {
@@ -85,6 +89,22 @@ public class Veiculo implements Serializable {
         this.marca = marca;
     }
 
+    public String getPlaca() {
+        return placa;
+    }
+
+    public void setPlaca(String placa) {
+        this.placa = placa;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
     @XmlTransient
     public List<Locacao> getLocacaoList() {
         return locacaoList;
@@ -100,14 +120,6 @@ public class Veiculo implements Serializable {
 
     public void setIdCategoria(Categoria idCategoria) {
         this.idCategoria = idCategoria;
-    }
-
-    public String getPlaca() {
-        return placa;
-    }
-
-    public void setPlaca(String placa) {
-        this.placa = placa;
     }
 
     @Override

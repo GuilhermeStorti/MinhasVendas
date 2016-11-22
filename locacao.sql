@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 21, 2016 at 11:25 
+-- Generation Time: Nov 22, 2016 at 11:11 
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -61,7 +61,7 @@ CREATE TABLE `Cliente` (
   `idCliente` int(11) NOT NULL,
   `nome` varchar(50) NOT NULL,
   `telefone` varchar(11) DEFAULT NULL,
-  `cpf` int(12) DEFAULT NULL,
+  `cpf` varchar(12) DEFAULT NULL,
   `cnh` varchar(15) DEFAULT NULL,
   `situacao` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -71,17 +71,17 @@ CREATE TABLE `Cliente` (
 --
 
 INSERT INTO `Cliente` (`idCliente`, `nome`, `telefone`, `cpf`, `cnh`, `situacao`) VALUES
-(1, 'Jorde', '1122', 1222, '2212', 'I'),
-(2, 'asdas', '1122', 1222, '2212', 'I'),
-(3, 'Guilherme', '1234', 12345, '123456', 'A'),
-(4, 'Rodolfo', '124578', 1245789, '1245786', 'I'),
-(5, 'Testando', '1234', 564654, '6484', 'I'),
-(6, 'asdas', '12423', 12312, '1231', 'A'),
-(7, 'Guilherme Lindo', '32172480', 101361, '', 'A'),
-(8, 'Guilherme', '', 12345, '', 'A'),
-(9, 'Eduarda', '1234', 12345, '123456', 'A'),
-(10, 'teste', '1', 12, '123', 'A'),
-(11, 'Eduarda', '11112222', 1111111, '2222222', 'A');
+(1, 'Jorde', '1122', '1222', '2212', 'I'),
+(2, 'asdas', '1122', '1222', '2212', 'I'),
+(3, 'Guilherme', '1234', '12345', '123456', 'A'),
+(4, 'Rodolfo', '124578', '1245789', '1245786', 'I'),
+(5, 'Testando', '1234', '564654', '6484', 'I'),
+(6, 'asdas', '12423', '12312', '1231', 'A'),
+(7, 'Guilherme Lindo', '32172480', '101361', '', 'A'),
+(8, 'Guilherme', '', '12345', '', 'A'),
+(9, 'Eduarda', '1234', '12345', '123456', 'A'),
+(10, 'teste', '1', '12', '123', 'A'),
+(11, 'Eduarda', '11112222', '1111111', '2222222', 'A');
 
 -- --------------------------------------------------------
 
@@ -104,7 +104,7 @@ CREATE TABLE `Funcionario` (
 --
 
 INSERT INTO `Funcionario` (`idfuncionario`, `matricula`, `nome`, `usuario`, `senha`, `cpf`, `data_nascimento`) VALUES
-(1, '123', 'Guilherme', 'gui', '123', 0, '0000-00-00');
+(1, '123', 'Guilherme', 'gui', '123', 0, '2015-04-01');
 
 -- --------------------------------------------------------
 
