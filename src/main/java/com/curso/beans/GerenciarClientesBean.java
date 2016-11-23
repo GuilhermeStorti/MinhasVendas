@@ -6,6 +6,7 @@ import com.curso.utils.JpaUtil;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
 /**
  * Created by guilherme on 27/10/16.
  */
-@SessionScoped
+@ViewScoped
 @ManagedBean(name = "gerenciarClientesBean")
 public class GerenciarClientesBean {
 

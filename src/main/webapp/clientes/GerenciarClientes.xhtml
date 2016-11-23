@@ -24,11 +24,11 @@
 			</p:selectOneMenu>-->
 			<p:panelGrid columns="3">
 				<p:outputLabel value="Filtrar por:" for="listar"/>
-				<p:selectOneListbox id="listar" value="#{gerenciarClientesBean.tipoBusca}">
+				<h:selectOneMenu id="listar" value="#{gerenciarClientesBean.tipoBusca}">
 					<f:selectItem itemLabel="Todos" itemValue="T" />
 					<f:selectItem itemLabel="Ativo" itemValue="A"/>
 					<f:selectItem itemLabel="Inativo" itemValue="I"/>
-				</p:selectOneListbox>
+				</h:selectOneMenu>
 				<p:commandButton value="Listar" icon="fa fa-fw fa-search" action="#{gerenciarClientesBean.carregarLista}" ajax="false" update="frm"/>
 			</p:panelGrid>
 		</h:form>
@@ -90,10 +90,10 @@
 					<p:inputText value="#{gerenciarClientesBean.cliente.cnh}" id="cnh" />
 
 					<p:outputLabel value="Situação" for="situacao"/>
-					<p:selectOneListbox id="situacao" value="#{gerenciarClientesBean.cliente.situacao}" style="width:125px">
+					<h:selectOneMenu id="situacao" value="#{gerenciarClientesBean.cliente.situacao}" style="width:125px">
 						<f:selectItem itemLabel="Ativo" itemValue="A" />
 						<f:selectItem itemLabel="Inativo" itemValue="I" />
-					</p:selectOneListbox>
+					</h:selectOneMenu>
 
 					<p:column/>
 

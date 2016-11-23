@@ -37,11 +37,10 @@
 				<p:inputMask mask="" id="cnh" size="14" value="#{cadastroClienteBean.cliente.cnh}"/>
 
 				<p:outputLabel value="Situação" for="situacao"/>
-				<p:selectOneListbox id="situacao" value="#{cadastroClienteBean.cliente.situacao}" style="width:125px">
+				<h:selectOneMenu id="situacao" value="#{cadastroClienteBean.cliente.situacao}" style="width:125px">
 					<f:selectItem itemLabel="Ativo" itemValue="A"/>
 					<f:selectItem itemLabel="Inativo" itemValue="I"/>
-				</p:selectOneListbox>
-
+				</h:selectOneMenu>
 				<p:column/>
 				<p:column>
 					<p:commandButton value="Limpar" action="#{cadastroClienteBean.salvar}" icon="fa fa-fw fa-eraser" update="form"/>
@@ -57,10 +56,6 @@
 					<p:commandButton value="Cancelar" onclick="PF('cd').close()"/>
 				</p:panelGrid>
 			</p:confirmDialog>
-
-		</h:form>
-
-		<h:form>
 
 		</h:form>
 
