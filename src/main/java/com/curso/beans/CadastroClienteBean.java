@@ -1,6 +1,5 @@
 package com.curso.beans;
 
-import com.curso.entidades.Autenticador;
 import com.curso.entidades.Cliente;
 import com.curso.utils.JpaUtil;
 
@@ -9,8 +8,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
-import java.io.IOException;
-import java.util.Map;
 
 /**
  * Created by guilherme on 12/10/16.
@@ -19,34 +16,7 @@ import java.util.Map;
 @ViewScoped
 public class CadastroClienteBean {
 
-    private Autenticador autenticador;
-
-    public void validarSecao(){
-        Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        String urlID = params.get("autenticador");
-        if (urlID == null){
-            this.autenticador = (Autenticador) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("autenticador");
-        }
-        FacesContext.getCurrentInstance()
-                .getApplication().getNavigationHandler()
-                .handleNavigation(FacesContext.getCurrentInstance(),
-                        null, "Login?faces-redirect=true");
-        FacesContext.getCurrentInstance().renderResponse();
-        if(!this.autenticador.isLogado()){
-            try {
-                FacesContext.getCurrentInstance()
-                        .getApplication().getNavigationHandler()
-                        .handleNavigation(FacesContext.getCurrentInstance(),
-                                null, "Login?faces-redirect=true");
-                FacesContext.getCurrentInstance().renderResponse();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
     public CadastroClienteBean() {
-        validarSecao();
         this.cliente = new Cliente();
         cliente.setSituacao('A');
     }

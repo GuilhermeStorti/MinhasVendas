@@ -7,13 +7,13 @@
     
     <ui:define name="titulo">Home</ui:define>
     
-    <ui:define name="titulo">Home</ui:define>
+    <ui:define name="tituloConteudo"><h1>Dashboard</h1></ui:define>
     
-    <ui:define name="corpo">        
+    <ui:define name="corpo">
 
-        <h3>Bem Vindo ao sistema de geranciamento de locação de veiculos da Alfa Soluções.</h3>
-
-        <p:chart type="line" model="#{homeBean.areaModel}" style="height:300px" rendered="true" />
+        <p:panelGrid columns="1" style="margin-top: 10%; width: 80%; margin-left: 10%">
+            <p:chart type="line" model="#{homeBean.areaModel}" style="height:300px" rendered="true" />
+        </p:panelGrid>
 
     </ui:define>
     

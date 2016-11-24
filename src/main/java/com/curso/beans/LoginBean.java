@@ -11,6 +11,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +50,7 @@ public class LoginBean {
                         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.FACES_MESSAGES, "Seja bem vindo!."));
                         this.autenticador.setUsuario(f.getUsuario());
                         this.autenticador.setLogado(true);
-                        inserirValidacao();
+                        this.funcionario = f;
                         FacesContext.getCurrentInstance().getExternalContext().redirect("/Home.xhtml");
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -58,7 +59,6 @@ public class LoginBean {
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Usuario ou senha invalidos."));
                     this.autenticador.setUsuario("");
                     this.autenticador.setLogado(false);
-                    inserirValidacao();
                 }
                 JpaUtil.closeManager(manager);
             }
@@ -67,16 +67,21 @@ public class LoginBean {
         }
     }
 
-    private void inserirValidacao(){
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        Map<String, Object> sessionMap = externalContext.getSessionMap();
-        sessionMap.put("autenticador", this.autenticador);
-    }
-
     public void limpar(){
         System.out.println("teste");
         usuario = "";
         senha = "";
+    }
+
+    public String logout() {
+        autenticador.setLogado(false);
+        HttpSession session =
+                (HttpSession)FacesContext.getCurrentInstance()
+                        .getExternalContext().getSession(true);
+        if(session != null) {
+            session.invalidate();
+        }
+        return "Login?faces-redirect=true";
     }
 
     public Autenticador getAutenticador() {

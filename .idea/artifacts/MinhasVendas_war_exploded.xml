@@ -20,6 +20,7 @@
           <element id="library" level="project" name="Maven: org.glassfish:javax.faces:2.1.17" />
           <element id="library" level="project" name="Maven: org.primefaces:primefaces:6.0" />
           <element id="library" level="project" name="Maven: org.primefaces.themes:bootstrap:1.0.10" />
+          <element id="library" level="project" name="Maven: javax.servlet:servlet-api:2.5" />
           <element id="library" level="project" name="Maven: org.webjars:jquery:2.1.4" />
           <element id="library" level="project" name="Maven: org.eclipse.persistence:eclipselink:2.5.2" />
           <element id="library" level="project" name="Maven: org.eclipse.persistence:javax.persistence:2.1.0" />

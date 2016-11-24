@@ -35,11 +35,11 @@
                 </p:column>
 
                 <p:outputLabel value="Data de locação"/>
-                <p:calendar />
+                <p:calendar value="#{cadastrarLocacaoBean.data}"  pattern="dd/MM/yyyy" showOn="button" />
             </p:panelGrid>
 
             <p:confirmDialog message="Selecionar Veiculo" header="Veiculos" severity="alert" widgetVar="veiculoCD"
-                             style="margin-top: 10%; margin-left: 10%" width="80%">
+                             width="80%" closable="false">
                 <p:dataTable value="#{cadastrarLocacaoBean.veiculos}" var="veiculo"
                              rows="10" paginator="true" paginatorPosition="bottom"
                              paginatorAlwaysVisible="false" rowsPerPageTemplate="10"
@@ -58,10 +58,11 @@
                                          ajax="false" title="Selecionar"/>
                     </p:column>
                 </p:dataTable>
+                <p:commandButton value="Fechar" ajax="false" style="float: right"/>
             </p:confirmDialog>
 
             <p:confirmDialog message="Selecionar Cliente" header="Clientes" severity="alert" widgetVar="clienteCD"
-                             style="margin-top: 10%; margin-left: 10%" width="80%">
+                             closable="false" width="80%">
 
                 <p:dataTable value="#{gerenciarClientesBean.clientes}" var="cliente"
                              rows="10" paginator="true" paginatorPosition="bottom"
@@ -91,6 +92,7 @@
                                          ajax="false" title="Selecionar"/>
                     </p:column>
                 </p:dataTable>
+                <p:commandButton value="Fechar" ajax="false" style="float: right"/>
             </p:confirmDialog>
         </h:form>
 

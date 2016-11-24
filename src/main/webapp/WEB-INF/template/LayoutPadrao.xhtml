@@ -7,10 +7,6 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title><ui:insert name="titulo">Minhas Vendas</ui:insert></title>
-	<script
-		src="#{request.contextPath}/resources/jquery/jquery-3.1.0.min.js"></script>
-	<script
-		src="#{request.contextPath}/resources/jquery/jquery.maskMoney.min.js"></script>
 	<link rel="stylesheet" type="text/css"
 		href="#{request.contextPath}/resources/bootstrap/css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css"
@@ -158,10 +154,9 @@
 					</a>
 				</li>
 				<li class="active">
-					<a
-							href="#{request.contextPath}/"> <i
-							class="fa fa-sign-out" /> <span>Sair</span>
-					</a>
+					<h:form id="logoutForm">
+						<p:commandButton action="#{loginBean.logout()}" icon="fa fa-sign-out" style="margin-left: 5px; margin-top: 7px;" title="Sair"/>
+					</h:form>
 				</li>
 				<!--<li class="treeview"><a href="#"><i class="fa fa-link"></i>-->
 						<!--<span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>-->
@@ -217,16 +212,6 @@
 	<script type="text/javascript"
 		src="#{request.contextPath}/resources/dist/js/app.min.js"></script>
 	<!-- Correio -->
-	
-	<script>
-		function configurarMoeda() {
-			$(".moeda").maskMoney({decimal: ",", thousands: ".", allowZero: true});
-		}
-		
-		$(document).ready(function() {
-			configurarMoeda();
-		});
-	</script>
 
 </h:body>
 </html>

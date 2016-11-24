@@ -12,6 +12,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @ManagedBean
@@ -26,22 +27,55 @@ public class CadastrarLocacaoBean {
 
     private Veiculo veiculo;
 
+    private Date data;
+
     public CadastrarLocacaoBean() {
         this.locacao = new Locacao();
-        this.cliente = new Cliente();
         this.veiculos = new ArrayList<>();
-        this.veiculo = new Veiculo();
+        this.data = new Date();
         buscarVeiculos();
     }
     
     public void salvar(){
-        EntityManager manager  = JpaUtil.getManager();
-        manager.getTransaction().begin();
-        manager.merge(locacao);
-        manager.getTransaction().commit();
-        JpaUtil.closeManager(manager);
-        
-        limpar();
+        if(validar()){
+            try{
+                EntityManager manager  = JpaUtil.getManager();
+                manager.getTransaction().begin();
+                manager.merge(locacao);
+                manager.getTransaction().commit();
+                JpaUtil.closeManager(manager);
+                limpar();
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Locação salvo com sucesso"));
+            }catch (Exception e){
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Erro ao persistir dados!"));
+            }
+
+
+        }
+    }
+
+    private boolean validar() {
+        int contador = 0;
+        if(this.cliente == null){
+            contador++;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Selecione um cliente!"));
+        }
+        if(this.veiculo == null){
+            contador++;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Selecione um veiculo!"));
+        }
+        if(contador == 0){
+            LoginBean usuarioBean = (LoginBean)
+                    FacesContext.getCurrentInstance()
+                            .getExternalContext().getSessionMap().get("loginBean");
+            this.locacao.setIdFuncionariocad(usuarioBean.getFuncionario());
+            this.locacao.setIdCliente(this.cliente);
+            this.locacao.setIdVeiculo(this.veiculo);
+            this.locacao.setDataLocacao(this.data);
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public void selecionarVeiculo(Veiculo veiculo){
@@ -56,6 +90,14 @@ public class CadastrarLocacaoBean {
         }catch (Exception e){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro", "Falha ao buscar veiculos!"));
         }
+    }
+
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
     }
 
     public List<Veiculo> getVeiculos() {
