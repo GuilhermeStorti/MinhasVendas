@@ -1,0 +1,64 @@
+<ui:composition template="../WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Novo cliente</ui:define>
+	
+	<ui:define name="tituloConteudo"><h1>Novo cliente</h1></ui:define>
+	
+	<ui:define name="corpo">
+
+		<h:form>
+			<p:toolbar>
+				<p:toolbarGroup>
+					<p:button value="Novo" icon="fa fa-fw fa-plus"  outcome="/clientes/CadastroCliente"/>
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisar" icon="fa fa-fw fa-search"  outcome="/clientes/GerenciarClientes" update="form"/>
+				</p:toolbarGroup>
+			</p:toolbar>
+
+		</h:form>
+
+		<h:form id="form">
+			<p:panelGrid columns="2" id="painel" style="margin-top: 20px; width:100%;" columnClasses="rotulo, campo">
+				<p:outputLabel value="Nome" for="nome"/>
+				<p:inputText id="nome" size="50" maxlength="50" value="#{cadastroClienteBean.cliente.nome}"/>
+
+				<p:outputLabel value="Telefone" for="telefone"/>
+				<p:inputText id="telefone" size="11" maxlength="11" value="#{cadastroClienteBean.cliente.telefone}"/>
+
+				<p:outputLabel value="CPF" for="cpf"/>
+				<p:inputMask mask="999.999.999-99" id="cpf" size="14" value="#{cadastroClienteBean.cliente.cpf}"/>
+
+				<p:outputLabel value="CNH" for="cnh"/>
+				<p:inputMask mask="" id="cnh" size="14" value="#{cadastroClienteBean.cliente.cnh}"/>
+
+				<p:outputLabel value="Situação" for="situacao"/>
+				<h:selectOneMenu id="situacao" value="#{cadastroClienteBean.cliente.situacao}" style="width:125px">
+					<f:selectItem itemLabel="Ativo" itemValue="A"/>
+					<f:selectItem itemLabel="Inativo" itemValue="I"/>
+				</h:selectOneMenu>
+				<p:column/>
+				<p:column>
+					<p:commandButton value="Limpar" action="#{cadastroClienteBean.salvar}" icon="fa fa-fw fa-eraser" update="form"/>
+					<p:commandButton value="Salvar" style="margin-left: 5px;" icon="fa fa-fw fa-save" onsuccess="PF('cd').show()"/>
+				</p:column>
+
+			</p:panelGrid>
+
+			<p:confirmDialog message="Confirmar cadastro" header="Cadastrar" severity="alert" widgetVar="cd"
+							 style="margin-top: 10%; margin-left: 45%">
+				<p:panelGrid columns="2">
+					<p:commandButton value="Salvar" action="#{cadastroClienteBean.salvar()}" onclick="PF('cd').close()"/>
+					<p:commandButton value="Cancelar" onclick="PF('cd').close()"/>
+				</p:panelGrid>
+			</p:confirmDialog>
+
+		</h:form>
+
+	</ui:define>
+	
+</ui:composition>

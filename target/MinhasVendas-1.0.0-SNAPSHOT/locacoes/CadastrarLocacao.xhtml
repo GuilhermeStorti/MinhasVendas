@@ -1,0 +1,101 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="titulo">Cadastrar Locação</ui:define>
+
+    <ui:define name="tituloConteudo"><h1>Cadastrar Locação</h1></ui:define>
+
+    <ui:define name="corpo">
+
+        <h:form id="form">
+        <p:toolbar>
+            <p:toolbarGroup>
+                <p:button value="Novo" outcome="/locacoes/CadastrarLocacao"/>
+                <p:commandButton style="margin-left:5px;" value="Salvar" action="#{cadastrarLocacaoBean.salvar()}" ajax="false" />
+            </p:toolbarGroup>
+        </p:toolbar>
+
+            <p:panelGrid columns="2" id="painel" style="margin-top: 20px; width:100%;" columnClasses="rotulo, campo">
+                <p:outputLabel value="Cliente" for="cliente" />
+                <p:column>
+                    <p:commandButton icon="fa fa-fw fa-search" id="cliente" onsuccess="PF('clienteCD').show()" title="Buscar"/>
+                    <p:spacer width="5px;"/>
+                    <p:outputLabel value="#{cadastrarLocacaoBean.cliente.nome}"/>
+                </p:column>
+
+                <p:outputLabel value="Veiculo" for="veiculo" />
+                <p:column>
+                    <p:commandButton icon="fa fa-fw fa-search" id="veiculo" onsuccess="PF('veiculoCD').show()" title="Buscar"/>
+                    <p:spacer width="5px;"/>
+                    <p:outputLabel value="#{cadastrarLocacaoBean.veiculo.modelo}"/>
+                </p:column>
+
+                <p:outputLabel value="Data de locação"/>
+                <p:calendar value="#{cadastrarLocacaoBean.data}"  pattern="dd/MM/yyyy" showOn="button" />
+            </p:panelGrid>
+
+            <p:confirmDialog message="Selecionar Veiculo" header="Veiculos" severity="alert" widgetVar="veiculoCD"
+                             width="80%" closable="false">
+                <p:dataTable value="#{cadastrarLocacaoBean.veiculos}" var="veiculo"
+                             rows="10" paginator="true" paginatorPosition="bottom"
+                             paginatorAlwaysVisible="false" rowsPerPageTemplate="10"
+                             emptyMessage="Nenhum registro encontrado." style="margin-top: 10px;" id="tableVeiculo">
+                    <p:column headerText="Marca" sortBy="#{veiculo.marca}" width="6%" styleClass="center">
+                        <h:outputText value="#{veiculo.marca}"/>
+                    </p:column>
+                    <p:column headerText="Modelo" sortBy="#{veiculo.modelo}" width="6%" styleClass="center">
+                        <h:outputText value="#{veiculo.modelo}"/>
+                    </p:column>
+                    <p:column headerText="Placa" sortBy="#{veiculo.placa}" width="6%" styleClass="center">
+                        <h:outputText value="#{veiculo.placa}"/>
+                    </p:column>
+                    <p:column width="8%" styleClass="center" headerText="Opções">
+                        <p:commandButton action="#{cadastrarLocacaoBean.selecionarVeiculo(veiculo)}" icon="fa fa-fw fa-check"
+                                         ajax="false" title="Selecionar"/>
+                    </p:column>
+                </p:dataTable>
+                <p:commandButton value="Fechar" ajax="false" style="float: right"/>
+            </p:confirmDialog>
+
+            <p:confirmDialog message="Selecionar Cliente" header="Clientes" severity="alert" widgetVar="clienteCD"
+                             closable="false" width="80%">
+
+                <p:dataTable value="#{gerenciarClientesBean.clientes}" var="cliente"
+                             rows="10" paginator="true" paginatorPosition="bottom"
+                             paginatorAlwaysVisible="false" rowsPerPageTemplate="10"
+                             emptyMessage="Nenhum registro encontrado." style="margin-top: 10px;" id="tableCliente">
+
+                    <p:column headerText="Código" sortBy="#{cliente.idCliente}" width="6%" styleClass="center">
+                        <h:outputText value="#{cliente.idCliente}"/>
+                    </p:column>
+                    <p:column headerText="Nome"	sortBy="#{cliente.nome}" filterBy="#{cliente.nome}" styleClass="center">
+                        <h:outputText value="#{cliente.nome}" />
+                    </p:column>
+                    <p:column headerText="Telefone" sortBy="#{cliente.telefone}" styleClass="center">
+                        <h:outputText value="#{cliente.telefone}" />
+                    </p:column>
+                    <p:column headerText="CPF" sortBy="#{cliente.cpf}" styleClass="center">
+                        <h:outputText value="#{cliente.cpf}" />
+                    </p:column>
+                    <p:column headerText="CNH" sortBy="#{cliente.cnh}" styleClass="center">
+                        <h:outputText value="#{cliente.cnh}" />
+                    </p:column>
+                    <p:column headerText="Situacão" width="10%" sortBy="#{cliente.situacao}" styleClass="center">
+                        <h:outputText value="#{cliente.situacao}" />
+                    </p:column>
+                    <p:column width="8%" styleClass="center" headerText="Opções">
+                        <p:commandButton action="#{cadastrarLocacaoBean.selecionarCliente(cliente)}" icon="fa fa-fw fa-check"
+                                         ajax="false" title="Selecionar"/>
+                    </p:column>
+                </p:dataTable>
+                <p:commandButton value="Fechar" ajax="false" style="float: right"/>
+            </p:confirmDialog>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

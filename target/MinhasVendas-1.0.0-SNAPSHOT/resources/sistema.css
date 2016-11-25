@@ -1,0 +1,52 @@
+.rotulo{
+	width: 16%;
+}
+
+.ajax-status{
+	float: right;
+	font-size: 2em;
+	margin-top: -26px;
+	margin-right: 5%;
+}
+
+.menu-lateral {
+	height:auto !important;
+}
+
+.login-topbar{
+	width: 100%;
+	height: 50px;
+	position: relative;
+	background-color: #3c8dbc;
+	margin-top: 0px;
+}
+
+.login-logo{
+	margin-left: 10px;
+	font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+	font-size: 20px;
+	font-weight: 300;
+	line-height: 50px;
+	text-align: center;
+	color: #fff;
+}
+
+.login-dialog{
+	margin-top: 60px;
+	position: relative;
+}
+
+.login-form{
+	width: 300px;
+	left: 50%;
+	margin-left: -175px;
+	position: relative;
+}
+
+.center{
+	text-align: center;
+}
+
+.situacao{
+	background-color: #7a869d;
+}

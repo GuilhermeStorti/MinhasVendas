@@ -1,0 +1,109 @@
+<ui:composition template="../WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Gerenciar clientes</ui:define>
+	
+	<ui:define name="tituloConteudo"><h1>Gerenciar clientes</h1></ui:define>
+	
+	<ui:define name="corpo">
+		
+		<p:toolbar>
+			<p:toolbarGroup align="right">
+				<p:button value="Novo" icon="fa fa-fw fa-plus"  outcome="/clientes/CadastroCliente"/>
+			</p:toolbarGroup>
+		</p:toolbar>
+
+		<h:form id="formBusca" style="margin-top: 10px;">
+			<!--<p:selectOneMenu id="listar" value="#{gerenciarClientesBean.tipoBusca}" style="width:125px">
+				<f:selectItem itemLabel="Todos" itemValue="T" />
+				<f:selectItem itemLabel="Ativo" itemValue="A"/>
+				<f:selectItem itemLabel="Inativo" itemValue="I"/>
+			</p:selectOneMenu>-->
+			<p:panelGrid columns="3">
+				<p:outputLabel value="Filtrar por:" for="listar"/>
+				<h:selectOneMenu id="listar" value="#{gerenciarClientesBean.tipoBusca}">
+					<f:selectItem itemLabel="Todos" itemValue="T" />
+					<f:selectItem itemLabel="Ativo" itemValue="A"/>
+					<f:selectItem itemLabel="Inativo" itemValue="I"/>
+				</h:selectOneMenu>
+				<p:commandButton value="Listar" icon="fa fa-fw fa-search" action="#{gerenciarClientesBean.carregarLista}" ajax="false" update="frm"/>
+			</p:panelGrid>
+		</h:form>
+		
+		<h:form id="frm" style="margin-top: 10px;">
+
+			<p:dataTable value="#{gerenciarClientesBean.clientes}" var="cliente"
+				rows="10" paginator="true" paginatorPosition="bottom"
+				paginatorAlwaysVisible="false" rowsPerPageTemplate="10,20,30"
+				emptyMessage="Nenhum registro encontrado." style="margin-top: 10px;" id="table">
+
+				<p:column headerText="Código" sortBy="#{cliente.idCliente}" width="6%" styleClass="center">
+					<h:outputText value="#{cliente.idCliente}"/>
+				</p:column>
+				<p:column headerText="Nome"	sortBy="#{cliente.nome}" filterBy="#{cliente.nome}" styleClass="center">
+					<h:outputText value="#{cliente.nome}" />
+				</p:column>
+				<p:column headerText="Telefone" sortBy="#{cliente.telefone}" styleClass="center">
+					<h:outputText value="#{cliente.telefone}" />
+				</p:column>
+				<p:column headerText="CPF" sortBy="#{cliente.cpf}" styleClass="center">
+					<h:outputText value="#{cliente.cpf}" />
+				</p:column>
+				<p:column headerText="CNH" sortBy="#{cliente.cnh}" styleClass="center">
+					<h:outputText value="#{cliente.cnh}" />
+				</p:column>
+				<p:column headerText="Situacão" width="10%" sortBy="#{cliente.situacao}" styleClass="center">
+					<h:outputText value="#{cliente.situacao}" />
+				</p:column>
+				<p:column width="8%" styleClass="center" headerText="Opções">
+					<p:commandButton action="#{gerenciarClientesBean.editar(cliente)}" icon="fa fa-fw fa-pencil" onclick="PF('cd').show()" title="Editar" ajax="false"/>
+					<p:spacer width="5px;"/>
+					<p:commandButton action="#{gerenciarClientesBean.inativar(cliente)}" icon="fa fa-fw fa-thumbs-o-down"
+									 ajax="false" rendered="#{gerenciarClientesBean.validar(cliente)}" title="Inativar"/>
+
+					<p:commandButton action="#{gerenciarClientesBean.ativar(cliente)}" icon="fa fa-fw fa-thumbs-o-up"
+									 ajax="false"  rendered="#{!gerenciarClientesBean.validar(cliente)}" title="Ativar"/>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+
+		<h:form id="formCd">
+			<p:confirmDialog message="Editar Cliente" header="Editar" widgetVar="cd" closable="false"
+							 style="margin-top: 10%; margin-left: 45%" visible="#{gerenciarClientesBean.exibir}">
+				<p:panelGrid columns="2" id="pnlEditar">
+					<p:outputLabel value="Id" for="id"/>
+					<p:inputText value="#{gerenciarClientesBean.cliente.idCliente}" id="id" disabled="true"/>
+
+					<p:outputLabel value="Nome" for="nome"/>
+					<p:inputText value="#{gerenciarClientesBean.cliente.nome}" id="nome" />
+
+					<p:outputLabel value="Telefone" for="telefone"/>
+					<p:inputText value="#{gerenciarClientesBean.cliente.telefone}" id="telefone" />
+
+					<p:outputLabel value="CPF" for="cpf"/>
+					<p:inputText value="#{gerenciarClientesBean.cliente.cpf}" id="cpf" />
+
+					<p:outputLabel value="CNH" for="cnh"/>
+					<p:inputText value="#{gerenciarClientesBean.cliente.cnh}" id="cnh" />
+
+					<p:outputLabel value="Situação" for="situacao"/>
+					<h:selectOneMenu id="situacao" value="#{gerenciarClientesBean.cliente.situacao}" style="width:125px">
+						<f:selectItem itemLabel="Ativo" itemValue="A" />
+						<f:selectItem itemLabel="Inativo" itemValue="I" />
+					</h:selectOneMenu>
+
+					<p:column/>
+
+					<p:column>
+						<p:commandButton value="Salvar" onclick="PF('cd').close()" icon="fa fa-fw fa-save" action="#{gerenciarClientesBean.salvarEdicao}"/>
+						<p:commandButton value="Voltar" onclick="PF('cd').close()" icon="fa fa-fw fa-mail-reply" style="margin-left: 10px;" action="#{gerenciarClientesBean.voltar}"/>
+					</p:column>
+				</p:panelGrid>
+			</p:confirmDialog>
+		</h:form>
+	</ui:define>
+	
+</ui:composition>

@@ -1,0 +1,20 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    
+    <ui:define name="titulo">Home</ui:define>
+    
+    <ui:define name="tituloConteudo"><h1>Dashboard</h1></ui:define>
+    
+    <ui:define name="corpo">
+
+        <p:panelGrid columns="1" style="margin-top: 10%; width: 80%; margin-left: 10%">
+            <p:chart type="line" model="#{homeBean.areaModel}" style="height:300px" rendered="true" />
+        </p:panelGrid>
+
+    </ui:define>
+    
+</ui:composition>

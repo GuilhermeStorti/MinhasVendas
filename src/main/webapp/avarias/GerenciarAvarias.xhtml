@@ -15,34 +15,19 @@
 		
 		<p:toolbar>
 			<p:toolbarGroup align="right">
-			
+                         <p:button value="Novo" outcome="/avarias/CadastroAvaria"/>
 			</p:toolbarGroup>
 		</p:toolbar>
 		
 		<h:form id="frm" style="margin-top: 10px;">
 
-			<p:dataTable  var="cliente"
+			<p:dataTable  var="avaria"
 				rows="10" paginator="true" paginatorPosition="bottom"
 				paginatorAlwaysVisible="false" rowsPerPageTemplate="10,20,30"
 				emptyMessage="Nenhum registro encontrado." style="margin-top: 10px;" id="table">
+                            
+                        <p:column headerText="Código" sortBy="#{}" width="8%" styleClass="center">
+                        <h:outputText value="#{multa.idMulta}"/>
+                        </p:column> 
 
-				<p:column headerText="Código"  width="6%" styleClass="center">
-					<h:outputText />
-				</p:column>
-				<p:column headerText="Avaria"	sortBy="#{cliente.nome}" filterBy="#{cliente.nome}" styleClass="center">
-					<h:outputText value="#{cliente.nome}" />
-				</p:column>
 				
-				<p:column width="5%" styleClass="center">
-					<p:commandLink action="#{gerenciarClientesBean.editar(cliente)}" styleClass="fa fa-pencil" title="Editar" ajax="false"/>
-					<p:spacer width="15px;"/>
-					<p:commandLink styleClass="fa fa-trash" title="Excluir" action="#{gerenciarClientesBean.excluir(cliente)}" ajax="false"/>
-				</p:column>
-
-			</p:dataTable>
-		</h:form>
-	</ui:define>
-
-    
-
-</ui:composition>

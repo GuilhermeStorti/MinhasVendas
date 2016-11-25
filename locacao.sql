@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.2
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Tempo de geração: 25/11/2016 às 22:02
--- Versão do servidor: 10.1.16-MariaDB
--- Versão do PHP: 7.0.9
+-- Host: 127.0.0.1
+-- Generation Time: 25-Nov-2016 às 23:32
+-- Versão do servidor: 10.1.8-MariaDB
+-- PHP Version: 5.6.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,16 +17,16 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `locacao`
+-- Database: `locacao`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `Avaria`
+-- Estrutura da tabela `avaria`
 --
 
-CREATE TABLE `Avaria` (
+CREATE TABLE `avaria` (
   `idAvaria` int(11) NOT NULL,
   `descricao` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -34,21 +34,21 @@ CREATE TABLE `Avaria` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `Categoria`
+-- Estrutura da tabela `categoria`
 --
 
-CREATE TABLE `Categoria` (
+CREATE TABLE `categoria` (
   `idCategoria` int(11) NOT NULL,
   `preco` decimal(18,2) DEFAULT NULL,
   `descricao` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Fazendo dump de dados para tabela `Categoria`
+-- Extraindo dados da tabela `categoria`
 --
 
-INSERT INTO `Categoria` (`idCategoria`, `preco`, `descricao`) VALUES
-(24, '12.50', 'Sedã'),
+INSERT INTO `categoria` (`idCategoria`, `preco`, `descricao`) VALUES
+(24, '12.50', 'SedÃ£'),
 (25, '10.00', 'Hatch'),
 (26, '15.00', 'SUV'),
 (27, '20.00', 'Caminhonete');
@@ -56,10 +56,10 @@ INSERT INTO `Categoria` (`idCategoria`, `preco`, `descricao`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `Cliente`
+-- Estrutura da tabela `cliente`
 --
 
-CREATE TABLE `Cliente` (
+CREATE TABLE `cliente` (
   `idCliente` int(11) NOT NULL,
   `nome` varchar(50) NOT NULL,
   `telefone` varchar(11) DEFAULT NULL,
@@ -69,10 +69,10 @@ CREATE TABLE `Cliente` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Fazendo dump de dados para tabela `Cliente`
+-- Extraindo dados da tabela `cliente`
 --
 
-INSERT INTO `Cliente` (`idCliente`, `nome`, `telefone`, `cpf`, `cnh`, `situacao`) VALUES
+INSERT INTO `cliente` (`idCliente`, `nome`, `telefone`, `cpf`, `cnh`, `situacao`) VALUES
 (1, 'Jorge', '1122', '1222', '2212', 'I'),
 (2, 'asdas', '1122', '1222', '2212', 'I'),
 (3, 'Guilherme', '1234', '12345', '123456', 'A'),
@@ -91,33 +91,34 @@ INSERT INTO `Cliente` (`idCliente`, `nome`, `telefone`, `cpf`, `cnh`, `situacao`
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `Funcionario`
+-- Estrutura da tabela `funcionario`
 --
 
-CREATE TABLE `Funcionario` (
+CREATE TABLE `funcionario` (
   `idfuncionario` int(11) NOT NULL,
   `matricula` varchar(45) NOT NULL,
   `nome` varchar(50) NOT NULL,
   `usuario` varchar(15) NOT NULL,
   `senha` varchar(6) NOT NULL,
-  `cpf` int(11) NOT NULL,
+  `cpf` varchar(15) NOT NULL,
   `data_nascimento` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Fazendo dump de dados para tabela `Funcionario`
+-- Extraindo dados da tabela `funcionario`
 --
 
-INSERT INTO `Funcionario` (`idfuncionario`, `matricula`, `nome`, `usuario`, `senha`, `cpf`, `data_nascimento`) VALUES
-(1, '123', 'Guilherme', 'gui', '123', 0, '2015-04-01');
+INSERT INTO `funcionario` (`idfuncionario`, `matricula`, `nome`, `usuario`, `senha`, `cpf`, `data_nascimento`) VALUES
+(1, '123', 'Guilherme', 'gui', '123', '0', '2015-04-01'),
+(2, '111', 'kadkakdk', 'k', '1111', '191.919.919-11', '2016-11-03');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `Locacao`
+-- Estrutura da tabela `locacao`
 --
 
-CREATE TABLE `Locacao` (
+CREATE TABLE `locacao` (
   `idLocacao` int(11) NOT NULL,
   `idVeiculo` int(11) NOT NULL,
   `idCliente` int(11) NOT NULL,
@@ -127,10 +128,10 @@ CREATE TABLE `Locacao` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Fazendo dump de dados para tabela `Locacao`
+-- Extraindo dados da tabela `locacao`
 --
 
-INSERT INTO `Locacao` (`idLocacao`, `idVeiculo`, `idCliente`, `idFuncionario_cad`, `idFuncionario_rec`, `data_locacao`) VALUES
+INSERT INTO `locacao` (`idLocacao`, `idVeiculo`, `idCliente`, `idFuncionario_cad`, `idFuncionario_rec`, `data_locacao`) VALUES
 (1, 6, 3, 1, NULL, NULL),
 (2, 5, 3, 1, NULL, '2016-11-23'),
 (3, 7, 3, 1, NULL, '2016-11-23'),
@@ -142,10 +143,10 @@ INSERT INTO `Locacao` (`idLocacao`, `idVeiculo`, `idCliente`, `idFuncionario_cad
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `Locacao_Avaria`
+-- Estrutura da tabela `locacao_avaria`
 --
 
-CREATE TABLE `Locacao_Avaria` (
+CREATE TABLE `locacao_avaria` (
   `idAvaria` int(11) NOT NULL,
   `idLocacao` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -153,10 +154,10 @@ CREATE TABLE `Locacao_Avaria` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `Locacao_Multa`
+-- Estrutura da tabela `locacao_multa`
 --
 
-CREATE TABLE `Locacao_Multa` (
+CREATE TABLE `locacao_multa` (
   `idLocacao` int(11) NOT NULL,
   `idMulta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -164,10 +165,10 @@ CREATE TABLE `Locacao_Multa` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `Multa`
+-- Estrutura da tabela `multa`
 --
 
-CREATE TABLE `Multa` (
+CREATE TABLE `multa` (
   `idMulta` int(11) NOT NULL,
   `descricao` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -175,10 +176,10 @@ CREATE TABLE `Multa` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `Veiculo`
+-- Estrutura da tabela `veiculo`
 --
 
-CREATE TABLE `Veiculo` (
+CREATE TABLE `veiculo` (
   `idVeiculo` int(11) NOT NULL,
   `idCategoria` int(11) NOT NULL,
   `marca` varchar(45) NOT NULL,
@@ -187,10 +188,10 @@ CREATE TABLE `Veiculo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Fazendo dump de dados para tabela `Veiculo`
+-- Extraindo dados da tabela `veiculo`
 --
 
-INSERT INTO `Veiculo` (`idVeiculo`, `idCategoria`, `marca`, `placa`, `modelo`) VALUES
+INSERT INTO `veiculo` (`idVeiculo`, `idCategoria`, `marca`, `placa`, `modelo`) VALUES
 (5, 24, 'Chevrolet', 'ccc1111', 'Prisma'),
 (6, 24, 'Fiat', 'fff1111', 'Siena'),
 (7, 24, 'Fiat', 'fff222', 'Gran Siena'),
@@ -212,37 +213,37 @@ INSERT INTO `Veiculo` (`idVeiculo`, `idCategoria`, `marca`, `placa`, `modelo`) V
 (23, 27, 'Chevrolet', 'ccc4737', 's10');
 
 --
--- Índices de tabelas apagadas
+-- Indexes for dumped tables
 --
 
 --
--- Índices de tabela `Avaria`
+-- Indexes for table `avaria`
 --
-ALTER TABLE `Avaria`
+ALTER TABLE `avaria`
   ADD PRIMARY KEY (`idAvaria`);
 
 --
--- Índices de tabela `Categoria`
+-- Indexes for table `categoria`
 --
-ALTER TABLE `Categoria`
+ALTER TABLE `categoria`
   ADD PRIMARY KEY (`idCategoria`);
 
 --
--- Índices de tabela `Cliente`
+-- Indexes for table `cliente`
 --
-ALTER TABLE `Cliente`
+ALTER TABLE `cliente`
   ADD PRIMARY KEY (`idCliente`);
 
 --
--- Índices de tabela `Funcionario`
+-- Indexes for table `funcionario`
 --
-ALTER TABLE `Funcionario`
+ALTER TABLE `funcionario`
   ADD PRIMARY KEY (`idfuncionario`);
 
 --
--- Índices de tabela `Locacao`
+-- Indexes for table `locacao`
 --
-ALTER TABLE `Locacao`
+ALTER TABLE `locacao`
   ADD PRIMARY KEY (`idLocacao`),
   ADD KEY `fk_Locacao_Veiculo1_idx` (`idVeiculo`),
   ADD KEY `fk_Locacao_Cliente1_idx` (`idCliente`),
@@ -250,105 +251,105 @@ ALTER TABLE `Locacao`
   ADD KEY `fk_Locacao_Funcionario2_idx` (`idFuncionario_rec`);
 
 --
--- Índices de tabela `Locacao_Avaria`
+-- Indexes for table `locacao_avaria`
 --
-ALTER TABLE `Locacao_Avaria`
+ALTER TABLE `locacao_avaria`
   ADD PRIMARY KEY (`idAvaria`,`idLocacao`),
   ADD KEY `fk_Avaria_has_Locacao_Locacao1_idx` (`idLocacao`),
   ADD KEY `fk_Avaria_has_Locacao_Avaria1_idx` (`idAvaria`);
 
 --
--- Índices de tabela `Locacao_Multa`
+-- Indexes for table `locacao_multa`
 --
-ALTER TABLE `Locacao_Multa`
+ALTER TABLE `locacao_multa`
   ADD PRIMARY KEY (`idLocacao`,`idMulta`),
   ADD KEY `fk_Locacao_has_Multa_Multa1_idx` (`idMulta`),
   ADD KEY `fk_Locacao_has_Multa_Locacao1_idx` (`idLocacao`);
 
 --
--- Índices de tabela `Multa`
+-- Indexes for table `multa`
 --
-ALTER TABLE `Multa`
+ALTER TABLE `multa`
   ADD PRIMARY KEY (`idMulta`);
 
 --
--- Índices de tabela `Veiculo`
+-- Indexes for table `veiculo`
 --
-ALTER TABLE `Veiculo`
+ALTER TABLE `veiculo`
   ADD PRIMARY KEY (`idVeiculo`),
   ADD KEY `fk_Veiculo_Categoria_idx` (`idCategoria`);
 
 --
--- AUTO_INCREMENT de tabelas apagadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de tabela `Avaria`
+-- AUTO_INCREMENT for table `avaria`
 --
-ALTER TABLE `Avaria`
+ALTER TABLE `avaria`
   MODIFY `idAvaria` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT de tabela `Categoria`
+-- AUTO_INCREMENT for table `categoria`
 --
-ALTER TABLE `Categoria`
+ALTER TABLE `categoria`
   MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
--- AUTO_INCREMENT de tabela `Cliente`
+-- AUTO_INCREMENT for table `cliente`
 --
-ALTER TABLE `Cliente`
+ALTER TABLE `cliente`
   MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
--- AUTO_INCREMENT de tabela `Funcionario`
+-- AUTO_INCREMENT for table `funcionario`
 --
-ALTER TABLE `Funcionario`
-  MODIFY `idfuncionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `funcionario`
+  MODIFY `idfuncionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT de tabela `Locacao`
+-- AUTO_INCREMENT for table `locacao`
 --
-ALTER TABLE `Locacao`
+ALTER TABLE `locacao`
   MODIFY `idLocacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
--- AUTO_INCREMENT de tabela `Multa`
+-- AUTO_INCREMENT for table `multa`
 --
-ALTER TABLE `Multa`
+ALTER TABLE `multa`
   MODIFY `idMulta` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT de tabela `Veiculo`
+-- AUTO_INCREMENT for table `veiculo`
 --
-ALTER TABLE `Veiculo`
+ALTER TABLE `veiculo`
   MODIFY `idVeiculo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
--- Restrições para dumps de tabelas
+-- Constraints for dumped tables
 --
 
 --
--- Restrições para tabelas `Locacao`
+-- Limitadores para a tabela `locacao`
 --
-ALTER TABLE `Locacao`
-  ADD CONSTRAINT `fk_Locacao_Cliente1` FOREIGN KEY (`idCliente`) REFERENCES `Cliente` (`idCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Locacao_Funcionario1` FOREIGN KEY (`idFuncionario_cad`) REFERENCES `Funcionario` (`idfuncionario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Locacao_Funcionario2` FOREIGN KEY (`idFuncionario_rec`) REFERENCES `Funcionario` (`idfuncionario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Locacao_Veiculo1` FOREIGN KEY (`idVeiculo`) REFERENCES `Veiculo` (`idVeiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `locacao`
+  ADD CONSTRAINT `fk_Locacao_Cliente1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_Locacao_Funcionario1` FOREIGN KEY (`idFuncionario_cad`) REFERENCES `funcionario` (`idfuncionario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_Locacao_Funcionario2` FOREIGN KEY (`idFuncionario_rec`) REFERENCES `funcionario` (`idfuncionario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_Locacao_Veiculo1` FOREIGN KEY (`idVeiculo`) REFERENCES `veiculo` (`idVeiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Restrições para tabelas `Locacao_Avaria`
+-- Limitadores para a tabela `locacao_avaria`
 --
-ALTER TABLE `Locacao_Avaria`
-  ADD CONSTRAINT `fk_Avaria_has_Locacao_Avaria1` FOREIGN KEY (`idAvaria`) REFERENCES `Avaria` (`idAvaria`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Avaria_has_Locacao_Locacao1` FOREIGN KEY (`idLocacao`) REFERENCES `Locacao` (`idLocacao`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `locacao_avaria`
+  ADD CONSTRAINT `fk_Avaria_has_Locacao_Avaria1` FOREIGN KEY (`idAvaria`) REFERENCES `avaria` (`idAvaria`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_Avaria_has_Locacao_Locacao1` FOREIGN KEY (`idLocacao`) REFERENCES `locacao` (`idLocacao`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Restrições para tabelas `Locacao_Multa`
+-- Limitadores para a tabela `locacao_multa`
 --
-ALTER TABLE `Locacao_Multa`
-  ADD CONSTRAINT `fk_Locacao_has_Multa_Locacao1` FOREIGN KEY (`idLocacao`) REFERENCES `Locacao` (`idLocacao`),
-  ADD CONSTRAINT `fk_Locacao_has_Multa_Multa1` FOREIGN KEY (`idMulta`) REFERENCES `Multa` (`idMulta`);
+ALTER TABLE `locacao_multa`
+  ADD CONSTRAINT `fk_Locacao_has_Multa_Locacao1` FOREIGN KEY (`idLocacao`) REFERENCES `locacao` (`idLocacao`),
+  ADD CONSTRAINT `fk_Locacao_has_Multa_Multa1` FOREIGN KEY (`idMulta`) REFERENCES `multa` (`idMulta`);
 
 --
--- Restrições para tabelas `Veiculo`
+-- Limitadores para a tabela `veiculo`
 --
-ALTER TABLE `Veiculo`
-  ADD CONSTRAINT `fk_Veiculo_Categoria` FOREIGN KEY (`idCategoria`) REFERENCES `Categoria` (`idCategoria`);
+ALTER TABLE `veiculo`
+  ADD CONSTRAINT `fk_Veiculo_Categoria` FOREIGN KEY (`idCategoria`) REFERENCES `categoria` (`idCategoria`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

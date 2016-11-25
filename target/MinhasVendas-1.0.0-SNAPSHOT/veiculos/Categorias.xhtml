@@ -1,0 +1,83 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" xmlns:P="http://java.sun.com/jsf/html">
+
+    <ui:define name="titulo">Categorias</ui:define>
+
+    <ui:define name="tituloConteudo"><h1>Categorias</h1></ui:define>
+
+    <ui:define name="corpo">
+
+        <h:form id="formTable">
+            <p:outputLabel value="Inserir nova:" />
+            <p:panelGrid columns="2">
+                <p:outputLabel value="Descricao" />
+                <p:inputText value="#{categoriasBean.categoria.descricao}" />
+
+                <p:outputLabel value="Preço" />
+                <p:inputText value="#{categoriasBean.categoria.preco}" />
+                <p:column/>
+                <p:commandButton value="Salvar" action="#{categoriasBean.salvarNovo}" ajax="false"/>
+            </p:panelGrid>
+
+            <p:dataTable value="#{categoriasBean.categorias}" var="categoria"
+                         rows="10" paginator="true" paginatorPosition="bottom"
+                         paginatorAlwaysVisible="false" rowsPerPageTemplate="10,20,30"
+                         emptyMessage="Nenhum registro encontrado." style="margin-top: 10px;" id="table">
+                <p:column headerText="Código" sortBy="#{categoria.idCategoria}" width="20%" styleClass="center">
+                    <h:outputText value="#{categoria.idCategoria}"/>
+                </p:column>
+                <p:column headerText="Descricao" sortBy="#{categoria.descricao}" width="20%" styleClass="center">
+                    <h:outputText value="#{categoria.descricao}"/>
+                </p:column>
+                <p:column headerText="Preço" sortBy="#{categoria.preco}" width="20%" styleClass="center">
+                    <h:outputText value="#{categoria.preco}"/>
+                </p:column>
+                <p:column headerText="Opções" styleClass="center" width="8%">
+                    <p:commandButton icon="fa fa-fw fa-pencil" action="#{categoriasBean.carregarCategoriaEdit(categoria)}"
+                                     onclick="PF('editCd').show()" title="Editar" ajax="false"/>
+                    <p:spacer width="5px;"/>
+                    <p:commandButton icon="fa fa-fw fa-trash" action="#{categoriasBean.carregarCategoriaExcluir(categoria)}"
+                                     title="Excluir" onclick="PF('cdExcluir').show()"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+
+        <h:form id="formCd">
+
+            <p:confirmDialog message="Editar Categoria" header="Editar" widgetVar="cdEditar" closable="false"
+                             style="margin-top: 10%; margin-left: 45%" visible="#{categoriasBean.exibirEdit}">
+                <p:panelGrid columns="2" id="pnlEditar">
+                    <p:outputLabel value="Id" />
+                    <p:inputText value="#{categoriasBean.categoria.idCategoria}" disabled="true"/>
+
+                    <p:outputLabel value="Descricao" />
+                    <p:inputText value="#{categoriasBean.categoria.descricao}" />
+
+                    <p:outputLabel value="Preço" />
+                    <p:inputText value="#{categoriasBean.categoria.preco}" />
+
+                    <p:column/>
+
+                    <p:column>
+                        <p:commandButton value="Salvar" onclick="PF('cdSalvar').close()" icon="fa fa-fw fa-save" action="#{categoriasBean.editar}"/>
+                        <p:commandButton value="Voltar" onclick="PF('cdSalvar').close()" icon="fa fa-fw fa-mail-reply" style="margin-left: 10px;" action="#{categoriasBean.voltar}"/>
+                    </p:column>
+                </p:panelGrid>
+            </p:confirmDialog>
+
+            <p:confirmDialog message="Exluir Categoria" header="Excluir" widgetVar="cdExcluir" closable="false"
+                             style="margin-top: 10%; margin-left: 45%">
+                <p:panelGrid columns="2" style="text-align: center">
+                    <p:commandButton value="Excluir" onclick="PF('cdExcluir').close()" icon="fa fa-fw fa-trash" action="#{categoriasBean.excluir}"/>
+                    <p:commandButton value="Voltar" onclick="PF('cdExcluir').close()" icon="fa fa-fw fa-mail-reply" style="margin-left: 10px;" action="#{gerenciarClientesBean.voltar}"/>
+                </p:panelGrid>
+            </p:confirmDialog>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>
