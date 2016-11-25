@@ -10,15 +10,15 @@
     <ui:define name="tituloConteudo"><h1>Cadastrar Locação</h1></ui:define>
 
     <ui:define name="corpo">
-        
+
+        <h:form id="form">
         <p:toolbar>
             <p:toolbarGroup>
                 <p:button value="Novo" outcome="/locacoes/CadastrarLocacao"/>
-                <p:commandButton style="margin-left:5px;" value="Salvar" action="#{cadastrarLocacaoBean.salvar()}" update="form" />
+                <p:commandButton style="margin-left:5px;" value="Salvar" action="#{cadastrarLocacaoBean.salvar()}" ajax="false" />
             </p:toolbarGroup>
         </p:toolbar>
-        
-        <h:form id="form">
+
             <p:panelGrid columns="2" id="painel" style="margin-top: 20px; width:100%;" columnClasses="rotulo, campo">
                 <p:outputLabel value="Cliente" for="cliente" />
                 <p:column>
