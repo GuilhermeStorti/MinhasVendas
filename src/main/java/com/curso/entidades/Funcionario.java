@@ -62,7 +62,7 @@ public class Funcionario implements Serializable {
     private String senha;
     @Basic(optional = false)
     @Column(name = "cpf")
-    private int cpf;
+    private String cpf;
     @Basic(optional = false)
     @Column(name = "data_nascimento")
     @Temporal(TemporalType.DATE)
@@ -79,7 +79,7 @@ public class Funcionario implements Serializable {
         this.idfuncionario = idfuncionario;
     }
 
-    public Funcionario(Integer idfuncionario, String matricula, String nome, String usuario, String senha, int cpf, Date dataNascimento) {
+    public Funcionario(Integer idfuncionario, String matricula, String nome, String usuario, String senha, String cpf, Date dataNascimento) {
         this.idfuncionario = idfuncionario;
         this.matricula = matricula;
         this.nome = nome;
@@ -129,11 +129,11 @@ public class Funcionario implements Serializable {
         this.senha = senha;
     }
 
-    public int getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 

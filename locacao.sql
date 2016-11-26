@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Tempo de geração: 25/11/2016 às 22:02
+-- Tempo de geração: 26/11/2016 às 14:25
 -- Versão do servidor: 10.1.16-MariaDB
 -- Versão do PHP: 7.0.9
 
@@ -100,7 +100,7 @@ CREATE TABLE `Funcionario` (
   `nome` varchar(50) NOT NULL,
   `usuario` varchar(15) NOT NULL,
   `senha` varchar(6) NOT NULL,
-  `cpf` int(11) NOT NULL,
+  `cpf` varchar(15) NOT NULL,
   `data_nascimento` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -109,7 +109,7 @@ CREATE TABLE `Funcionario` (
 --
 
 INSERT INTO `Funcionario` (`idfuncionario`, `matricula`, `nome`, `usuario`, `senha`, `cpf`, `data_nascimento`) VALUES
-(1, '123', 'Guilherme', 'gui', '123', 0, '2015-04-01');
+(1, '123', 'Guilherme', 'gui', '123', '0', '2015-04-01');
 
 -- --------------------------------------------------------
 
