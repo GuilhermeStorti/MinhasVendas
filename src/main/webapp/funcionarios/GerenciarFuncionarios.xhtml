@@ -61,7 +61,7 @@
                     </h:form>
                     <h:form id="formCd">
 			<p:confirmDialog message="Editar Cliente" header="Editar" widgetVar="cd" closable="false"  
-                                         style="margin-top: 10%; margin-left: 45%" visible="#{gerenciarFuncionariosBean.exibir}">
+                                         visible="#{gerenciarFuncionariosBean.exibir}">
 				<p:panelGrid columns="2" id="pnlEditar">
                                     <p:outputLabel value="Id" for="id"/>
                                     <p:inputText value="#{gerenciarFuncionariosBean.funcionario.idfuncionario}" id="id" disabled="true"/>
@@ -74,14 +74,15 @@
                                     <p:outputLabel value="Senha" for="senha"/>
                                     <p:inputText value="#{gerenciarFuncionariosBean.funcionario.senha}" id="senha" />
                                     <p:outputLabel value="CPF" for="cpf"/>
-                                    <p:inputText value="#{gerenciarFuncionariosBean.funcionario.cpf}" id="cpf" />
+                                    <p:inputMask mask="999.999.999-99" id="cpf" size="14" value="#{gerenciarFuncionariosBean.funcionario.cpf}"/>
                                     <p:outputLabel value="Data de nascimento" for="data"/>
-                                    <p:inputText value="#{gerenciarFuncionariosBean.funcionario.dataNascimento}" id="data" />
-                                    
+                                    <p:calendar value="#{gerenciarFuncionariosBean.funcionario.dataNascimento}" pattern="dd/MM/yyyy" id="data"/>
+
+                                    <p:column/>
                                    <p:column>
                                        <p:commandButton value="Salvar" onclick="PF('cd').close()" icon="fa fa-fw fa-save" action="#{gerenciarFuncionariosBean.salvarEdicao}"/>
                                        <p:commandButton value="Voltar" onclick="PF('cd').close()" icon="fa fa-fw fa-mail-reply" style="margin-left: 10px;" action="#{gerenciarFuncionariosBean.voltar}"/>
-				   </p:column>
+                                   </p:column>
                                     
                               </p:panelGrid> 
                         </p:confirmDialog>

@@ -31,46 +31,35 @@ public class LoginBean {
 
     public LoginBean() {
         this.funcionario = new Funcionario();
-        this.usuario = "";
-        this.senha = "";
     }
     
     private Funcionario funcionario;
-    private String usuario;
-    private String senha;
     private Autenticador autenticador;
 
-    public void entrar(){
-        try {
+    public String entrar() {
             EntityManager manager = JpaUtil.getManager();
-            List<Funcionario> funcionarios = manager.createNamedQuery("Funcionario.findAll").getResultList();
-            for(Funcionario f : funcionarios){
-                if(f.getUsuario().equals(usuario) && f.getSenha().equals(senha)){
-                    try {
-                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.FACES_MESSAGES, "Seja bem vindo!."));
-                        this.autenticador.setUsuario(f.getUsuario());
-                        this.autenticador.setLogado(true);
-                        this.funcionario = f;
-                        FacesContext.getCurrentInstance().getExternalContext().redirect("/Home.xhtml");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }else {
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Usuario ou senha invalidos."));
-                    this.autenticador.setUsuario("");
-                    this.autenticador.setLogado(false);
-                }
-                JpaUtil.closeManager(manager);
+
+            Funcionario funcionarioBuscado = manager.createNamedQuery("Funcionario.findByUsuario", Funcionario.class)
+                    .setParameter("usuario", funcionario.getUsuario())
+                    .getSingleResult();
+            JpaUtil.closeManager(manager);
+            if (funcionarioBuscado != null &&
+                    funcionarioBuscado.getSenha().equals(funcionario.getSenha())) {
+                funcionario = funcionarioBuscado;
+                autenticador.setLogado(true);
+                return "Home?faces-redirect=true";
+            } else {
+                FacesContext.getCurrentInstance()
+                        .addMessage(null, new FacesMessage("Par login/senha inválido!"));
+                funcionario = new Funcionario();
+                return null;
             }
-        }catch (Exception ex){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro", "Falha ao buscar dados!"));
-        }
     }
 
     public void limpar(){
         System.out.println("teste");
-        usuario = "";
-        senha = "";
+        funcionario.setUsuario("");
+        funcionario.setSenha("");
     }
 
     public String logout() {
@@ -98,22 +87,6 @@ public class LoginBean {
 
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
-    }
-
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
     }
     
     

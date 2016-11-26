@@ -57,7 +57,11 @@
 			<a href="#" class="sidebar-toggle" data-toggle="offcanvas"
 				role="button"> <span class="sr-only">Toggle navigation</span>
 			</a>
+			<h:form id="logoutForm">
+				<p:commandButton action="#{loginBean.logout()}" icon="fa fa-sign-out" style="float: right; position: relative; margin-top: 10px; margin-right: 10px;" title="Sair"/>
+			</h:form>
 		</nav>
+
 	</header>
 
 	<!-- Left side column. contains the logo and sidebar -->
@@ -152,11 +156,6 @@
 						href="#{request.contextPath}/Relatorios.xhtml"> <i
 						class="fa fa-line-chart" /> <span>Relatórios</span>
 					</a>
-				</li>
-				<li class="active">
-					<h:form id="logoutForm">
-						<p:commandButton action="#{loginBean.logout()}" icon="fa fa-sign-out" style="margin-left: 5px; margin-top: 7px;" title="Sair"/>
-					</h:form>
 				</li>
 				<!--<li class="treeview"><a href="#"><i class="fa fa-link"></i>-->
 						<!--<span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>-->

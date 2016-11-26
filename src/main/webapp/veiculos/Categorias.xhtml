@@ -49,7 +49,7 @@
         <h:form id="formCd">
 
             <p:confirmDialog message="Editar Categoria" header="Editar" widgetVar="cdEditar" closable="false"
-                             style="margin-top: 10%; margin-left: 45%" visible="#{categoriasBean.exibirEdit}">
+                             visible="#{categoriasBean.exibirEdit}">
                 <p:panelGrid columns="2" id="pnlEditar">
                     <p:outputLabel value="Id" />
                     <p:inputText value="#{categoriasBean.categoria.idCategoria}" disabled="true"/>

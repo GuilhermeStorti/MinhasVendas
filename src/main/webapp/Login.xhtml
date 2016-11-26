@@ -39,9 +39,9 @@
 
 			<h:panelGrid columns="2" style="text-align: center;">
 				<p:outputLabel value="Usuario: " for="login"/>
-					<p:inputText value="#{loginBean.usuario}" id="login" size="30" maxlength="15" style="margin-bottom: 5px; margin-left: 5px;" tabindex="1"/>
+					<p:inputText value="#{loginBean.funcionario.usuario}" id="login" size="30" maxlength="15" style="margin-bottom: 5px; margin-left: 5px;" tabindex="1"/>
 				<p:outputLabel value="Senha: " for="senha"/>
-					<p:password value="#{loginBean.senha}" id="senha" size="30" maxlength="6" style="margin-bottom: 5px; margin-left: 5px;" tabindex="2"/>
+					<p:password value="#{loginBean.funcionario.senha}" id="senha" size="30" maxlength="6" style="margin-bottom: 5px; margin-left: 5px;" tabindex="2"/>
 				<p:column/>
 				<p:column>
 					<p:commandButton value="Limpar" action="#{loginBean.limpar()}" update="frm" tabindex="3" icon="fa fa-fw fa-eraser"/>
