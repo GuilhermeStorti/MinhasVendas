@@ -28,7 +28,15 @@ public class GerenciarMultasBean {
     
     public void editar(Multa multa){
         this.multa = multa;
-        System.out.println(this.multa);
+
+        EntityManager manager = JpaUtil.getManager();
+        manager.getTransaction().begin();
+        Multa antigo = manager.find(Multa.class, multa.getIdMulta());
+        antigo = multa;
+        manager.merge(antigo);
+        manager.getTransaction().commit();
+        JpaUtil.closeManager(manager);
+        carregarLista();
     }
     
     public void excluir(Multa multa){

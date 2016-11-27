@@ -7,24 +7,34 @@
 
     <ui:define name="titulo">Cadastrar Avaria</ui:define>
 
-    <ui:define name="titulo">Cadastrar Avaria</ui:define>
+    <ui:define name="tituloConteudo"><h1>Cadastrar Avaria</h1></ui:define>
 
     <ui:define name="corpo">
         
          <p:toolbar>
             <p:toolbarGroup>
-                <p:button value="Novo" outcome="/avarias/CadastroAvaria"/>
-                <p:commandButton style="margin-left:5px;" value="Salvar" action="#{cadastrarAvariasBean.salvar()}" update="form" />
+                <p:button value="Novo" icon="fa fa-fw fa-plus" outcome="/avarias/CadastroAvaria"/>
+                
+              
+                    
             </p:toolbarGroup>
             <p:toolbarGroup align="right">
-				<p:button value="Pesquisar" outcome="/avarias/GerenciarAvarias" update="form"/>
+				<p:button value="Pesquisar" icon="fa fa-fw fa-search"  outcome="/avarias/GerenciarAvarias" />
             </p:toolbarGroup>
         </p:toolbar>
         
         <h:form id="form">
+            
             <p:panelGrid columns="2" id="painel" style="margin-top: 20px; width:100%;" columnClasses="rotulo, campo">
                 <p:outputLabel value="Descrição" for="descricao"/>
-                <p:inputText id="descricao" size="50" maxlength="50" value="#{cadastrarAvariasBean.avaria.descricao}" />
+                <p:inputText id="descricao" size="50" maxlength="50" value="#{cadastrarAvariasBean.avaria.descricao}"  />
+
+                <p:column/>
+
+                <p:column>
+                    <p:commandButton value="Limpar" action="#{cadastrarAvariasBean.limpar}" icon="fa fa-fw fa-eraser" update="form"/>
+                    <p:commandButton value="Salvar" action="#{cadastrarAvariasBean.salvar()}" style="margin-left: 5px;" icon="fa fa-fw fa-save" />
+                </p:column>
             </p:panelGrid>
         </h:form>
        

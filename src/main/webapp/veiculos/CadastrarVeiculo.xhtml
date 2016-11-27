@@ -11,11 +11,65 @@
 
     <ui:define name="corpo">
 
-        <h:form id="formCad">
-            <p:panelGrid columns="2">
-                <p:outputLabel value="Nome" for="nome"/>
-                <p:inputText value="#{cadastrarVeiculoBean.veiculo.}"
+        <h:form id="form">
+
+            <p:toolbar>
+                <p:toolbarGroup>
+                    <p:button value="Novo" icon="fa fa-fw fa-plus"  outcome="/veiculos/CadastrarVeiculo"/>
+                </p:toolbarGroup>
+                <p:toolbarGroup align="right">
+                    <p:button value="Pesquisar" icon="fa fa-fw fa-search"  outcome="/veiculos/GerenciarVeiculos" update="form"/>
+                </p:toolbarGroup>
+            </p:toolbar>
+
+            <p:panelGrid columns="2" style="margin-top: 20px; width:100%;" columnClasses="rotulo, campo">
+                <p:outputLabel value="Marca" for="marca"/>
+                <p:inputText id="marca" value="#{cadastrarVeiculoBean.veiculo.marca}" />
+
+                <p:outputLabel value="Modelo" for="modelo"/>
+                <p:inputText id="modelo" value="#{cadastrarVeiculoBean.veiculo.modelo}" />
+
+                <p:outputLabel value="Placa" for="placa"/>
+                <p:inputText id="placa" value="#{cadastrarVeiculoBean.veiculo.placa}" />
+
+                <p:outputLabel value="Categoria" for="categoria"/>
+                <p:column>
+                    <p:commandButton icon="fa fa-fw fa-search" id="categoria" onsuccess="PF('categoriaCD').show()" title="Buscar"/>
+                    <p:spacer width="5px;"/>
+                    <p:outputLabel value="#{cadastrarVeiculoBean.categoria.descricao}"/>
+                </p:column>
+                <p:column />
+
+                <p:column>
+                    <p:commandButton value="Limpar" action="#{cadastrarVeiculoBean.limpar}" icon="fa fa-fw fa-eraser" ajax="false"/>
+                    <p:commandButton value="Salvar" style="margin-left: 5px;" icon="fa fa-fw fa-save" action="#{cadastrarVeiculoBean.salvar}" update="form"/>
+                </p:column>
             </p:panelGrid>
+
+            <p:confirmDialog message="Selecionar Categoria" header="Categorias" severity="alert" widgetVar="categoriaCD"
+                             closable="false" width="80%">
+
+                <p:dataTable value="#{cadastrarVeiculoBean.categorias}" var="categoria"
+                             rows="10" paginator="true" paginatorPosition="bottom"
+                             paginatorAlwaysVisible="false" rowsPerPageTemplate="10,20,30"
+                             emptyMessage="Nenhum registro encontrado." style="margin-top: 10px;" id="tableCat">
+                    <p:column headerText="Código" sortBy="#{categoria.idCategoria}" width="20%" styleClass="center">
+                        <h:outputText value="#{categoria.idCategoria}"/>
+                    </p:column>
+                    <p:column headerText="Descricao" sortBy="#{categoria.descricao}" width="20%" styleClass="center">
+                        <h:outputText value="#{categoria.descricao}"/>
+                    </p:column>
+                    <p:column headerText="Preço" sortBy="#{categoria.preco}" width="20%" styleClass="center">
+                        <h:outputText value="#{categoria.preco}"/>
+                    </p:column>
+                    <p:column headerText="Opções" styleClass="center" width="8%">
+                        <p:commandButton icon="fa fa-fw fa-check" action="#{cadastrarVeiculoBean.carregarCategoria(categoria)}"
+                                         onclick="PF('editCd').show()" title="Selevionar" ajax="false"/>
+                        <p:spacer width="5px;"/>
+                    </p:column>
+                </p:dataTable>
+                <p:commandButton value="Fechar" ajax="false" style="float: right"/>
+            </p:confirmDialog>
         </h:form>
 
     </ui:define>

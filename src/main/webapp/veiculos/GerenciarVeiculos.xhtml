@@ -5,14 +5,41 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui">
 
-    <ui:define name="titulo">Cadastrar Avaria</ui:define>
+    <ui:define name="titulo">Gerenciar Veiculos</ui:define>
 
-    <ui:define name="titulo">Cadastrar Avaria</ui:define>
+    <ui:define name="tituloConteudo"><h1>Gerenciar Veiculos</h1></ui:define>
 
     <ui:define name="corpo">
 
-        CORPOOOOO
-        <!--Trabalhe aqui!!-->
+        <p:toolbar>
+            <p:toolbarGroup align="right">
+                <p:button value="Novo" icon="fa fa-fw fa-plus"  outcome="/veiculos/CadastrarVeiculo"/>
+            </p:toolbarGroup>
+        </p:toolbar>
+
+        <h:form id="form">
+            <p:dataTable value="#{gerenciarVeiculosBean.veiculos}" var="veiculo"
+                         rows="10" paginator="true" paginatorPosition="bottom"
+                         paginatorAlwaysVisible="false" rowsPerPageTemplate="10,20,30"
+                         emptyMessage="Nenhum registro encontrado." style="margin-top: 10px;" id="tableVeiculos">
+
+                <p:column headerText="Código" sortBy="#{veiculo.idVeiculo}" width="6%" styleClass="center">
+                    <h:outputText value="#{veiculo.idVeiculo}"/>
+                </p:column>
+                <p:column headerText="Marca"	sortBy="#{veiculo.marca}" styleClass="center">
+                    <h:outputText value="#{veiculo.marca}" />
+                </p:column>
+                <p:column headerText="Modelo" sortBy="#{veiculo.modelo}" styleClass="center">
+                    <h:outputText value="#{veiculo.modelo}" />
+                </p:column>
+                <p:column headerText="Categoria" sortBy="#{veiculo.idCategoria.descricao}" styleClass="center">
+                    <h:outputText value="#{veiculo.idCategoria.descricao}" />
+                </p:column>
+                <p:column headerText="Placa" sortBy="#{veiculo.placa}" styleClass="center">
+                    <h:outputText value="#{veiculo.placa}" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
 
     </ui:define>
 

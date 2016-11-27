@@ -7,25 +7,63 @@
 
     <ui:define name="titulo">Cadastrar Multa</ui:define>
 
-    <ui:define name="titulo">Cadastrar Multa</ui:define>
+    <ui:define name="tituloConteudo"><h1>Cadastrar Multa</h1></ui:define>
 
     <ui:define name="corpo">
 
-        <p:toolbar>
-            <p:toolbarGroup>
-                <p:button value="Novo" outcome="/multas/CadastrarMulta"/>
-                <p:commandButton style="margin-left:5px;" value="Salvar" action="#{cadastrarMultaBean.salvar()}" update="form" />
-            </p:toolbarGroup>
-            <p:toolbarGroup align="right">
-				<p:button value="Pesquisar" outcome="/multas/GerenciarMultas" update="form"/>
-            </p:toolbarGroup>
-        </p:toolbar>
-        
         <h:form id="form">
+
+            <p:toolbar>
+                <p:toolbarGroup>
+                    <p:button value="Novo" outcome="/multas/CadastrarMulta" icon="fa fa-fw fa-plus"  />
+                    <p:commandButton style="margin-left:5px;" value="Salvar" action="#{cadastrarMultaBean.salvar}"
+                                     update="form" icon="fa fa-fw fa-save" />
+                </p:toolbarGroup>
+                <p:toolbarGroup align="right">
+                    <p:button value="Pesquisar" icon="fa fa-fw fa-search"   outcome="/multas/GerenciarMultas" update="form"/>
+                </p:toolbarGroup>
+            </p:toolbar>
+
             <p:panelGrid columns="2" id="painel" style="margin-top: 20px; width:100%;" columnClasses="rotulo, campo">
+
+                <p:outputLabel value="Veiculo" for="veiculo"/>
+                <p:column>
+                    <p:commandButton icon="fa fa-fw fa-search" id="veiculo" onsuccess="PF('veiculoCD').show()"
+                                     title="Buscar"/>
+                    <p:spacer width="5px;"/>
+                    <p:outputLabel value="#{cadastrarMultaBean.veiculo.modelo}"/>
+                </p:column>
+
+                <p:outputLabel value="Valor" for="valor"/>
+                <p:inputText id="valor" size="50" maxlength="50" value="#{cadastrarMultaBean.multa.valor}"/>
+
                 <p:outputLabel value="Descrição" for="descricao"/>
-                <p:inputText id="descricao" size="50" maxlength="50" value="#{cadastrarMultaBean.multa.descricao}" />
+                <p:inputText id="descricao" size="50" maxlength="50" value="#{cadastrarMultaBean.multa.descricao}"/>
             </p:panelGrid>
+
+            <p:confirmDialog message="Selecionar Veiculo" header="Veiculos" severity="alert" widgetVar="veiculoCD"
+                             width="80%" closable="false">
+                <p:dataTable value="#{cadastrarLocacaoBean.veiculos}" var="veiculo"
+                             rows="10" paginator="true" paginatorPosition="bottom"
+                             paginatorAlwaysVisible="false" rowsPerPageTemplate="10"
+                             emptyMessage="Nenhum registro encontrado." style="margin-top: 10px;" id="tableVeiculo">
+                    <p:column headerText="Marca" sortBy="#{veiculo.marca}" width="6%" styleClass="center">
+                        <h:outputText value="#{veiculo.marca}"/>
+                    </p:column>
+                    <p:column headerText="Modelo" sortBy="#{veiculo.modelo}" width="6%" styleClass="center">
+                        <h:outputText value="#{veiculo.modelo}"/>
+                    </p:column>
+                    <p:column headerText="Placa" sortBy="#{veiculo.placa}" width="6%" styleClass="center">
+                        <h:outputText value="#{veiculo.placa}"/>
+                    </p:column>
+                    <p:column width="8%" styleClass="center" headerText="Opções">
+                        <p:commandButton action="#{cadastrarMultaBean.selecionarVeiculo(veiculo)}"
+                                         icon="fa fa-fw fa-check"
+                                         ajax="false" title="Selecionar"/>
+                    </p:column>
+                </p:dataTable>
+                <p:commandButton value="Fechar" ajax="false" style="float: right"/>
+            </p:confirmDialog>
         </h:form>
 
     </ui:define>

@@ -45,9 +45,12 @@ public class GerenciarFuncionariosBean
         this.exibir = true;
     }
     
-     public void voltar(){
-        this.exibir = false;
+     public String voltar(){
+        return "GerenciarFuncionarios?faces-redirect=true";
+       
     }
+     
+ 
      
        public void salvarEdicao(){
         EntityManager manager = JpaUtil.getManager();

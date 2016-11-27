@@ -7,27 +7,76 @@
 
     <ui:define name="titulo">Gerenciar Avarias</ui:define>
 
-    <ui:define name="titulo">Gerenciar Avarias</ui:define>
+    <ui:define name="tituloConteudo"><h1>Gerenciar Avarias</h1></ui:define>
 
     <ui:define name="corpo">
 
-      
-		
-		<p:toolbar>
-			<p:toolbarGroup align="right">
-                         <p:button value="Novo" outcome="/avarias/CadastroAvaria"/>
-			</p:toolbarGroup>
-		</p:toolbar>
-		
-		<h:form id="frm" style="margin-top: 10px;">
+        <p:toolbar>
+            <p:toolbarGroup align="right">
+                <p:button value="Novo" icon="fa fa-fw fa-plus" outcome="/avarias/CadastroAvaria"/>
+            </p:toolbarGroup>
+        </p:toolbar>
 
-			<p:dataTable  var="avaria"
-				rows="10" paginator="true" paginatorPosition="bottom"
-				paginatorAlwaysVisible="false" rowsPerPageTemplate="10,20,30"
-				emptyMessage="Nenhum registro encontrado." style="margin-top: 10px;" id="table">
-                            
-                        <p:column headerText="Código" sortBy="#{}" width="8%" styleClass="center">
-                        <h:outputText value="#{multa.idMulta}"/>
-                        </p:column> 
+        <h:form id="formBusca" style="margin-top: 10px;">
+            <p:panelGrid columns="1">
+                <p:commandButton value="Listar" icon="fa fa-fw fa-search"
+                                 action="#{gerenciarAvariasBean.carregarLista()}" update="frm"/>
+            </p:panelGrid>
+        </h:form>
 
-				
+        <h:form id="frm" style="margin-top: 10px;">
+            <p:dataTable value="#{gerenciarAvariasBean.avarias}" var="avaria" rows="10" paginator="true"
+                         paginatorPosition="bottom"
+                         paginatorAlwaysVisible="false" rowsPerPageTemplate="10,20,30"
+                         emptyMessage="Nenhum registro encontrado." style="margin-top: 10px;" id="table">
+
+
+                <p:column headerText="IdAvaria" sortBy="#{avaria.idAvaria}" width="6%"
+                          styleClass="center">
+                    <h:outputText value="#{avaria.idAvaria}"/>
+                </p:column>
+
+
+                <p:column headerText="Descricao" sortBy="#{avaria.descricao}" filterBy="#{avaria.descricao}"
+                          styleClass="center">
+                    <h:outputText value="#{avaria.descricao}"/>
+                </p:column>
+
+                <p:column width="8%" styleClass="center" headerText="Opções">
+                    <p:commandButton action="#{gerenciarAvariasBean.editar(avaria)}" icon="fa fa-fw fa-pencil"
+                                     onclick="PF('cd').show()" title="Editar" ajax="false"/>
+                    <p:spacer width="5px;"/>
+                    <p:commandButton action="#{gerenciarAvariasBean.excluir(avaria)}" icon="fa fa-fw fa-trash"
+                                     title="Excluir" ajax="false"/>
+                </p:column>
+
+            </p:dataTable>
+
+        </h:form>
+
+        <h:form id="formCd">
+            <p:confirmDialog message="Editar Cliente" header="Editar" widgetVar="cd" closable="false"
+                             visible="#{gerenciarAvariasBean.exibir}">
+                <p:panelGrid columns="2" id="pnlEditar">
+                    <p:outputLabel value="Id" for="id"/>
+                    <p:inputText value="#{gerenciarAvariasBean.avaria.idAvaria}" id="id" disabled="true"/>
+                    <p:outputLabel value="Descricao" for="descricao"/>
+                    <p:inputText value="#{gerenciarAvariasBean.avaria.descricao}" id="descricao"/>
+
+                    <p:column>
+                        <p:commandButton value="Salvar" onclick="PF('cd').close()" icon="fa fa-fw fa-save"
+                                         action="#{gerenciarAvariasBean.salvarEdicao}"/>
+                        <p:commandButton value="Voltar" onclick="PF('cd').close()" icon="fa fa-fw fa-mail-reply"
+                                         style="margin-left: 10px;" action="#{gerenciarAvariasBean.voltar}"/>
+                    </p:column>
+                </p:panelGrid>
+            </p:confirmDialog>
+
+        </h:form>
+
+
+    </ui:define>
+
+</ui:composition>
+
+		

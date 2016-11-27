@@ -12,13 +12,13 @@
 
         <p:toolbar>
             <p:toolbarGroup align="right">
-                <p:button value="Novo" outcome="/multas/CadastrarMulta"/>
+                <p:button value="Novo" icon="fa fa-fw fa-plus" outcome="/multas/CadastrarMulta"/>
             </p:toolbarGroup>
         </p:toolbar>
 
         <h:form id="frm" style="margin-top: 10px;">
 
-            <p:dataTable var="multa"
+            <p:dataTable var="multa" value="#{gerenciarMultasBean.multas}"
                          rows="10" paginator="true" paginatorPosition="bottom"
                          paginatorAlwaysVisible="false" rowsPerPageTemplate="10,20,30"
                          emptyMessage="Nenhum registro encontrado." style="margin-top: 10px;" id="table">
@@ -26,14 +26,23 @@
                 <p:column headerText="Código" sortBy="#{multa.idMulta}" width="8%" styleClass="center">
                     <h:outputText value="#{multa.idMulta}"/>
                 </p:column>
-                <p:column headerText="Descrição:" sortBy="#{multa.descricao}" filterBy="#{multa.descricao}" styleClass="center">
+
+                <p:column headerText="Veiculo" sortBy="#{multa.idVeiculo.modelo}" width="8%" styleClass="center">
+                    <h:outputText value="#{multa.idVeiculo.modelo}"/>
+                </p:column>
+
+                <p:column headerText="Descrição" sortBy="#{multa.descricao}" filterBy="#{multa.descricao}" styleClass="center">
                     <h:outputText value="#{multa.descricao}" />
                 </p:column>
 
-                <p:column width="5%" styleClass="center">
-                    <p:commandLink action="#{gerenciarMultasBean.editar(multa)}" styleClass="fa fa-pencil" title="Editar" ajax="false"/>
-                    <p:spacer width="15px;"/>
-                    <p:commandLink styleClass="fa fa-trash" title="Excluir" action="#{gerenciarMultasBean.excluir(multa)}" ajax="false"/>
+                <p:column headerText="Valor" sortBy="#{multa.valor}" width="8%" styleClass="center">
+                    <h:outputText value="#{multa.valor}"/>
+                </p:column>
+
+                <p:column width="8%" styleClass="center">
+                    <p:commandButton action="#{gerenciarMultasBean.editar(multa)}" icon="fa fa-fw fa-pencil" title="Editar" ajax="false"/>
+                    <p:spacer width="10px;"/>
+                    <p:commandButton icon="fa fa-fw fa-trash" title="Excluir" action="#{gerenciarMultasBean.excluir(multa)}" ajax="false"/>
                 </p:column>
 
             </p:dataTable>

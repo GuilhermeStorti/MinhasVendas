@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Tempo de geração: 26/11/2016 às 14:25
+-- Tempo de geração: 27/11/2016 às 18:57
 -- Versão do servidor: 10.1.16-MariaDB
 -- Versão do PHP: 7.0.9
 
@@ -30,6 +30,13 @@ CREATE TABLE `Avaria` (
   `idAvaria` int(11) NOT NULL,
   `descricao` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Fazendo dump de dados para tabela `Avaria`
+--
+
+INSERT INTO `Avaria` (`idAvaria`, `descricao`) VALUES
+(2, 'Batida');
 
 -- --------------------------------------------------------
 
@@ -75,7 +82,7 @@ CREATE TABLE `Cliente` (
 INSERT INTO `Cliente` (`idCliente`, `nome`, `telefone`, `cpf`, `cnh`, `situacao`) VALUES
 (1, 'Jorge', '1122', '1222', '2212', 'I'),
 (2, 'asdas', '1122', '1222', '2212', 'I'),
-(3, 'Guilherme', '1234', '12345', '123456', 'A'),
+(3, 'Guilherme', '1234', '12345', '123456', 'I'),
 (4, 'Rodolfo', '124578', '1245789', '1245786', 'I'),
 (5, 'Testando', '1234', '564654', '6484', 'I'),
 (6, 'asdas', '12423', '12312', '1231', 'A'),
@@ -109,7 +116,8 @@ CREATE TABLE `Funcionario` (
 --
 
 INSERT INTO `Funcionario` (`idfuncionario`, `matricula`, `nome`, `usuario`, `senha`, `cpf`, `data_nascimento`) VALUES
-(1, '123', 'Guilherme', 'gui', '123', '0', '2015-04-01');
+(1, '123', 'Guilherme', 'gui', '123', '123.456.789-10', '2015-04-01'),
+(2, '321', 'Gaucho', 'gauchin', '123', '111.111.111-11', '2016-11-02');
 
 -- --------------------------------------------------------
 
@@ -169,8 +177,17 @@ CREATE TABLE `Locacao_Multa` (
 
 CREATE TABLE `Multa` (
   `idMulta` int(11) NOT NULL,
-  `descricao` varchar(100) NOT NULL
+  `descricao` varchar(100) NOT NULL,
+  `valor` double(10,0) NOT NULL,
+  `idVeiculo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Fazendo dump de dados para tabela `Multa`
+--
+
+INSERT INTO `Multa` (`idMulta`, `descricao`, `valor`, `idVeiculo`) VALUES
+(3, 'Teste', 100, 8);
 
 -- --------------------------------------------------------
 
@@ -209,7 +226,10 @@ INSERT INTO `Veiculo` (`idVeiculo`, `idCategoria`, `marca`, `placa`, `modelo`) V
 (20, 26, 'Ford', 'for1111', 'EcoSport'),
 (21, 27, 'Ford', 'for2222', 'Ranger'),
 (22, 27, 'VolksWagen', 'vvv1234', 'Amarok'),
-(23, 27, 'Chevrolet', 'ccc4737', 's10');
+(23, 27, 'Chevrolet', 'ccc4737', 's10'),
+(24, 25, 'Hyundai', 'hyu2020', 'HB20'),
+(25, 27, 'Dodge', 'dod1500', 'Ram'),
+(26, 25, 'VolksWagen', 'fus0001', 'Fusca');
 
 --
 -- Índices de tabelas apagadas
@@ -269,7 +289,8 @@ ALTER TABLE `Locacao_Multa`
 -- Índices de tabela `Multa`
 --
 ALTER TABLE `Multa`
-  ADD PRIMARY KEY (`idMulta`);
+  ADD PRIMARY KEY (`idMulta`),
+  ADD KEY `idVeiculo` (`idVeiculo`);
 
 --
 -- Índices de tabela `Veiculo`
@@ -286,7 +307,7 @@ ALTER TABLE `Veiculo`
 -- AUTO_INCREMENT de tabela `Avaria`
 --
 ALTER TABLE `Avaria`
-  MODIFY `idAvaria` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idAvaria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de tabela `Categoria`
 --
@@ -301,7 +322,7 @@ ALTER TABLE `Cliente`
 -- AUTO_INCREMENT de tabela `Funcionario`
 --
 ALTER TABLE `Funcionario`
-  MODIFY `idfuncionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idfuncionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de tabela `Locacao`
 --
@@ -311,12 +332,12 @@ ALTER TABLE `Locacao`
 -- AUTO_INCREMENT de tabela `Multa`
 --
 ALTER TABLE `Multa`
-  MODIFY `idMulta` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idMulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de tabela `Veiculo`
 --
 ALTER TABLE `Veiculo`
-  MODIFY `idVeiculo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `idVeiculo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 --
 -- Restrições para dumps de tabelas
 --
@@ -343,6 +364,12 @@ ALTER TABLE `Locacao_Avaria`
 ALTER TABLE `Locacao_Multa`
   ADD CONSTRAINT `fk_Locacao_has_Multa_Locacao1` FOREIGN KEY (`idLocacao`) REFERENCES `Locacao` (`idLocacao`),
   ADD CONSTRAINT `fk_Locacao_has_Multa_Multa1` FOREIGN KEY (`idMulta`) REFERENCES `Multa` (`idMulta`);
+
+--
+-- Restrições para tabelas `Multa`
+--
+ALTER TABLE `Multa`
+  ADD CONSTRAINT `Multa_ibfk_1` FOREIGN KEY (`idVeiculo`) REFERENCES `Veiculo` (`idVeiculo`);
 
 --
 -- Restrições para tabelas `Veiculo`

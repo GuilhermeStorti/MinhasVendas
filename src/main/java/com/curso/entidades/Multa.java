@@ -13,7 +13,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -30,7 +32,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Multa.findAll", query = "SELECT m FROM Multa m")
     , @NamedQuery(name = "Multa.findByIdMulta", query = "SELECT m FROM Multa m WHERE m.idMulta = :idMulta")
-    , @NamedQuery(name = "Multa.findByDescricao", query = "SELECT m FROM Multa m WHERE m.descricao = :descricao")})
+    , @NamedQuery(name = "Multa.findByDescricao", query = "SELECT m FROM Multa m WHERE m.descricao = :descricao")
+    , @NamedQuery(name = "Multa.findByValor", query = "SELECT m FROM Multa m WHERE m.valor = :valor")})
 public class Multa implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,8 +45,14 @@ public class Multa implements Serializable {
     @Basic(optional = false)
     @Column(name = "descricao")
     private String descricao;
+    @Basic(optional = false)
+    @Column(name = "valor")
+    private double valor;
     @ManyToMany(mappedBy = "multaList")
     private List<Locacao> locacaoList;
+    @JoinColumn(name = "idVeiculo", referencedColumnName = "idVeiculo")
+    @ManyToOne(optional = false)
+    private Veiculo idVeiculo;
 
     public Multa() {
     }
@@ -52,9 +61,10 @@ public class Multa implements Serializable {
         this.idMulta = idMulta;
     }
 
-    public Multa(Integer idMulta, String descricao) {
+    public Multa(Integer idMulta, String descricao, double valor) {
         this.idMulta = idMulta;
         this.descricao = descricao;
+        this.valor = valor;
     }
 
     public Integer getIdMulta() {
@@ -73,6 +83,14 @@ public class Multa implements Serializable {
         this.descricao = descricao;
     }
 
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
     @XmlTransient
     public List<Locacao> getLocacaoList() {
         return locacaoList;
@@ -80,6 +98,14 @@ public class Multa implements Serializable {
 
     public void setLocacaoList(List<Locacao> locacaoList) {
         this.locacaoList = locacaoList;
+    }
+
+    public Veiculo getIdVeiculo() {
+        return idVeiculo;
+    }
+
+    public void setIdVeiculo(Veiculo idVeiculo) {
+        this.idVeiculo = idVeiculo;
     }
 
     @Override
