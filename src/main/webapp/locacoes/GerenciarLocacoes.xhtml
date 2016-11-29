@@ -8,12 +8,74 @@
     <ui:define name="titulo">Gerenciar Locações</ui:define>
 
     <ui:define name="titulo">Gerenciar Locações</ui:define>
-
+    
     <ui:define name="corpo">
+    
+    <p:toolbar>
+            <p:toolbarGroup align="right">
+                <p:button value="Novo" outcome="/locacoes/CadastrarLocacao"/>
+            </p:toolbarGroup>
+        </p:toolbar>
 
-        CORPOOOOO
-        <!--Trabalhe aqui!!-->
+    <h:form id="frm" style="margin-top: 10px;">
 
-    </ui:define>
+        <p:dataTable value="#{gerenciarLocacaoBean.locacoes}" var="locacao"
+                         rows="10" paginator="true" paginatorPosition="bottom"
+                         paginatorAlwaysVisible="false" rowsPerPageTemplate="10,20,30"
+                         emptyMessage="Nenhum registro encontrado." style="margin-top: 10px;" id="table">
+
+                <p:column headerText="Código" sortBy="#{locacao.idLocacao}" width="8%" styleClass="center">
+                    <h:outputText value="#{locacao.idLocacao}"/>
+                </p:column>
+            <p:column headerText="Veiculo:" sortBy="#{locacao.idVeiculo.placa}" filterBy="#{locacao.idVeiculo.placa}" styleClass="center">
+                    <h:outputText value="#{locacao.idVeiculo.placa}" />
+                </p:column>
+            <p:column headerText="Cliente:" sortBy="#{locacao.idCliente.nome}" filterBy="#{locacao.idCliente.nome}" styleClass="center">
+                    <h:outputText value="#{locacao.idCliente.nome}" />
+                </p:column>
+            <p:column headerText="Funcionario:" sortBy="#{locacao.idFuncionariocad.nome}" filterBy="#{locacao.idFuncionariocad.nome}" styleClass="center">
+                    <h:outputText value="#{locacao.idFuncionariocad.nome    }" />
+                </p:column>
+                <p:column headerText="Data Locação:" sortBy="#{locacao.dataLocacao}" filterBy="#{locacao.dataLocacao}" styleClass="center">
+                    <h:outputText value="#{locacao.dataLocacao}" />
+                </p:column>
+
+                <p:column width="8%" styleClass="center" headerText="Opções">
+                    <p:commandButton action="#{gerenciarLocacaoBean.editar(locacao)}" icon="fa fa-fw fa-pencil" onclick="PF('cd').show()" title="Editar"/>
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
+
+		<h:form id="formcd">
+			<p:confirmDialog message="Editar Locação" header="Editar" widgetVar="cd" closable="false" visible="#{gerenciarClientesBean.exibir}">
+				<p:panelGrid columns="2" id="pnlEditar">
+					<p:outputLabel value="Id" for="idLocacao"/>
+                                        <p:inputText value="#{gerenciarLocacaoBean.locacao.idLocacao}" id="idLocacao" disabled="true"/>
+
+					<p:outputLabel value="Placa" for="idVeiculo"/>
+                                        <p:inputText value="#{gerenciarLocacaoBean.locacao.idVeiculo.placa}" id="idVeiculo" />
+
+					<p:outputLabel value="Cliente" for="idCliente"/>
+                                        <p:inputText value="#{gerenciarLocacaoBean.locacao.idCliente.nome}" id="idCliente" />
+
+					<p:outputLabel value="Funcionario" for="idFuncionariocad"/>
+                                        <p:inputText value="#{gerenciarLocacaoBean.locacao.idFuncionariocad.nome}" id="idFuncionariocad" />
+
+					<p:outputLabel value="Data de Locação" for="dataLocacao"/>
+                                        <p:calendar pattern="dd/MM/yyyy" value="#{gerenciarLocacaoBean.locacao.dataLocacao}" id="dataLocacao" />
+
+                    <p:column />
+					<p:column>
+						<p:commandButton value="Salvar" onclick="PF('cd').close()" icon="fa fa-fw fa-save" action="#{gerenciarClientesBean.salvarEdicao}"/>
+                        <p:commandButton value="Fechar" onclick="PF('cd').close()" icon="fa fa-fw fa-mail-reply "/>
+					</p:column>
+				</p:panelGrid>
+			</p:confirmDialog>
+		</h:form>
+        
+        
+        </ui:define>
 
 </ui:composition>
+

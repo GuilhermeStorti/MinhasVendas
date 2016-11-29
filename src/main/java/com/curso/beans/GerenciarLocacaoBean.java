@@ -30,6 +30,21 @@ public class GerenciarLocacaoBean {
         locacoes = manager.createQuery("SELECT l FROM Locacao l", Locacao.class).getResultList();
         JpaUtil.closeManager(manager);
     }
+    
+    public void editar(Locacao locacao){
+        this.locacao = locacao;
+    }
+    
+    public void salvarEdicao(){
+        EntityManager manager = JpaUtil.getManager();
+        manager.getTransaction().begin();
+        Locacao antigo = manager.find(Locacao.class, locacao.getIdLocacao());
+        antigo = locacao;
+        manager.merge(antigo);
+        manager.getTransaction().commit();
+        JpaUtil.closeManager(manager);
+        carregarLista();
+    }
 
     public List<Locacao> getLocacoes() {
         return locacoes;

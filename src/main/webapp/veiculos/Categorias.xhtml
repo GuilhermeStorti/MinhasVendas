@@ -69,8 +69,7 @@
                 </p:panelGrid>
             </p:confirmDialog>
 
-            <p:confirmDialog message="Exluir Categoria" header="Excluir" widgetVar="cdExcluir" closable="false"
-                             style="margin-top: 10%; margin-left: 45%">
+            <p:confirmDialog message="Exluir Categoria" header="Excluir" widgetVar="cdExcluir" closable="false">
                 <p:panelGrid columns="2" style="text-align: center">
                     <p:commandButton value="Excluir" onclick="PF('cdExcluir').close()" icon="fa fa-fw fa-trash" action="#{categoriasBean.excluir}"/>
                     <p:commandButton value="Voltar" onclick="PF('cdExcluir').close()" icon="fa fa-fw fa-mail-reply" style="margin-left: 10px;" action="#{gerenciarClientesBean.voltar}"/>
