@@ -3,6 +3,10 @@ package com.curso.utils;
 import com.curso.beans.LoginBean;
 import com.curso.entidades.Funcionario;
 
+import java.io.IOException;
+
+import javax.faces.application.NavigationHandler;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
@@ -18,24 +22,23 @@ public class PhaseListener implements javax.faces.event.PhaseListener {
 
     @Override
     public void afterPhase(PhaseEvent event) {
-        if("/Login.xhtml".equals(
-                FacesContext.getCurrentInstance()
-                        .getViewRoot().getViewId())) 		{
+    	FacesContext facesContext = event.getFacesContext().getCurrentInstance();
+    	ExternalContext externalContext = facesContext.getExternalContext();
+    	NavigationHandler handler = facesContext.getApplication().getNavigationHandler();
+    	
+        if("/Login.xhtml".equals(facesContext.getViewRoot().getViewId())) {
             return;
         }
-        LoginBean usuarioBean = (LoginBean)
-                FacesContext.getCurrentInstance()
-                        .getExternalContext().getSessionMap().get("loginBean");
+        
+        LoginBean usuarioBean = (LoginBean) externalContext.getSessionMap().get("loginBean");
         Funcionario usuarioLogado = null;
+        
         if (usuarioBean != null) {
             usuarioLogado = usuarioBean.getFuncionario();
         }
-        if (usuarioLogado == null || !usuarioBean.getAutenticador().isLogado()) {
-            FacesContext.getCurrentInstance()
-                    .getApplication().getNavigationHandler()
-                    .handleNavigation(FacesContext.getCurrentInstance(),
-                            null, "Login?faces-redirect=true");
-            FacesContext.getCurrentInstance().renderResponse();
+        if (usuarioLogado == null || !usuarioBean.getAutenticador().isLogado()) {            
+           handler.handleNavigation(facesContext, null, "forbidden");
+           facesContext.renderResponse();
         }
     }
 

@@ -25,21 +25,15 @@ public class CadastroClienteBean {
 
 
     private boolean validar(){
-        int i = 0;
         if(cliente.getNome() == null || cliente.getNome().isEmpty()){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Nome é obrigatório!"));
-            i++;
+            return false;
         }
         if(cliente.getCpf() == null || cliente.getCpf().isEmpty()){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "CPF é obrigatório!"));
-            i++;
-        }
-
-        if(i != 0){
             return false;
-        }else{
-            return true;
         }
+	    return true;
     }
 
     public void salvar(){
@@ -47,6 +41,7 @@ public class CadastroClienteBean {
             try {
                 EntityManager manager = JpaUtil.getManager();
                 manager.getTransaction().begin();
+                cliente.setCpf(cliente.getCpf().replace(".", "").replace("-", ""));
                 manager.merge(cliente);
                 manager.getTransaction().commit();
                 JpaUtil.closeManager(manager);
