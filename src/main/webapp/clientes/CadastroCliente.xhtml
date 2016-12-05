@@ -49,8 +49,7 @@
 
 			</p:panelGrid>
 
-			<p:confirmDialog message="Confirmar cadastro" header="Cadastrar" severity="alert" widgetVar="cd"
-							 style="margin-top: 10%; margin-left: 45%">
+			<p:confirmDialog message="Confirmar cadastro" header="Cadastrar" severity="alert" widgetVar="cd">
 				<p:panelGrid columns="2">
 					<p:commandButton value="Salvar" action="#{cadastroClienteBean.salvar()}" onclick="PF('cd').close()"/>
 					<p:commandButton value="Cancelar" onclick="PF('cd').close()"/>
